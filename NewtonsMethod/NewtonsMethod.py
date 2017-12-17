@@ -19,6 +19,7 @@ class NewtonsMethod:
         self.altcolors=("#D2ACD3","#8B76A1","#C587AE","#F5B9C9","#FBCDBE","#FDEEC7","#5DBCD2")
         self.useAlts = False
         self.iterations = 34
+        self.minIterations = 0
 
         #print(self.symbol)
         #print(self.__func)
@@ -40,6 +41,7 @@ class NewtonsMethod:
     def useFuncPrime(self, z):
         return self.__funcPrime(z)
 
+    #Reset coordinates in this step. 
     def updateFunc(self, function, symbol):
         self.symbol = symbol
         self.__func = function
@@ -131,10 +133,11 @@ class NewtonsMethod:
                     if self.shading:
                         for iterates in range(0,self.iterations):
                             z = self.newton(z)
-                            for x in range(0,len(self.roots)):
-                                if cmath.isclose(z, self.roots[x], rel_tol = self.reltol):
-                                    self.plotZ(begZ, self.getColor(x , iterates))
-                                    iterates = self.iterations
+                            if iterates > self.minIterations:
+                                for x in range(0,len(self.roots)):
+                                    if cmath.isclose(z, self.roots[x], rel_tol = self.reltol):
+                                        self.plotZ(begZ, self.getColor(x , iterates))
+                                        iterates = self.iterations
                     else:
                         for iterates in range(0, self.iterations):
                             z = self.newton(z)

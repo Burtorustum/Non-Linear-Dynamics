@@ -99,6 +99,7 @@ def main():
             yMax = getOption(-100,100)
             window.window.defaultCoords = [xMin, yMin, xMax, yMax]
 
+        #MAKE INTO SELECTABLE LIST
         elif inp == 'coolfunctions':
             print("7*z**6 - 3*z**3 + 2")
             print("35*z**9 - 180*z**7 + 378*z**5 - 420*z**3 + 315*z")
@@ -137,6 +138,8 @@ def main():
                 inn = input("Would you like to keep the new iterate value, " + str(newIterate) + " y/n? ")
                 if inn == 'y':
                     window.iterations = newIterate
+
+        #ADD CHANGE RESOLUTION
 
 if __name__ == '__main__':
     main()
