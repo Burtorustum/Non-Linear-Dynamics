@@ -9,4 +9,6 @@ pip3 install numpy --upgrade;
 pip3 install scipy --upgrade;
 pip3 install matplotlib --upgrade;
 echo ''
+python3 --version
+pip3 --version
 echo 'all done'
