@@ -1,2 +1,2 @@
-# Non-Linear-Dynamics
-Projects for Non-Linear Dynamics
+# Non-Linear Dynamics
+Projects for Non-Linear Dynamics class.
