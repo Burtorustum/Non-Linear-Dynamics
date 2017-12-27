@@ -12,10 +12,3 @@ def getOption(i,n):
             print("There is a problem in your input syntax")
             x = n+1
     return x
-
-def main():
-        getOption(0,3)
-        print("good job.")
-
-if __name__ == "__main__":
-    main()
