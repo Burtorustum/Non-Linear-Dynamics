@@ -1,8 +1,10 @@
 #main.py
+import sys
+sys.path.insert(0, '/Users/aburur/Desktop/NonLinear_Dynamics/Utility')
 from NewtonsMethod import NewtonsMethod
-from getOption import *
 from sympy import *
 from math import pi
+from getOption import *
 
 def main():
     z = symbols('z')

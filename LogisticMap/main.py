@@ -1,4 +1,6 @@
 #main.py
+import sys
+sys.path.insert(0, '/Users/aburur/Desktop/NonLinear_Dynamics/Utility')
 from BifurcationDiagram import BifurcationDiagram
 from CobwebDiagram import CobwebDiagram
 from getOption import *
@@ -20,7 +22,7 @@ def main():
             running = False
 
         elif inp == "commands":
-            print("\nCommands for the bifurcation diagram include:\nzoom - input 2 values to change your horizontal coordinates to. \nclickzoom - click to zoom! \ntwoclickzoom - Click in two spots, one to the left and one to the right and see that area")
+            print("\nCommands for the biurcation diagram include:\nzoom - input 2 values to change your horizontal coordinates to. \nclickzoom - click to zoom! \ntwoclickzoom - Click in two spots, one to the left and one to the right and see that area")
             print("zoomout - zoom to the original coordinates \nbiftransients - change the number of transients lost before graphing the diagram and regraph")
             print("\nCommands for the cobweb diagram inlude: \nchanger - change the r value of the map \nchangex - change the initial x value of the map")
             print("cobiterates - change the number of iterates shown in the diagram")
