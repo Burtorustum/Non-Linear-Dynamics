@@ -8,7 +8,7 @@ def main():
 
     print("\nThis program is for viewing the effects of running Newton's method on polynomials in the complex plane. Please wait while the inital function is drawn (z**3-1)")
     running = True
-    window = NewtonsMethod(func= z**3-1, sym=z, coords=[-1,-1,1,1])
+    window = NewtonsMethod(func=z**3-1, sym=z, coords=[-1,-1,1,1])
     window.quality = 1.3
     window.draw()
     print("If you need a list of commands type, 'commands'. To quit, type 'quit'.")
