@@ -2,6 +2,7 @@
 from NewtonsMethod import NewtonsMethod
 from getOption import *
 from sympy import *
+from math import pi
 
 def main():
     z = symbols('z')
@@ -47,7 +48,7 @@ def main():
             except NameError:
                 print("Make sure you are using the variable z.")
             except SyntaxError:
-                print()
+                print("There was an error in the syntax of your function")
 
         elif inp == 'zoom':
             window.window.zoom()
