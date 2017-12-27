@@ -14,7 +14,7 @@ class NewtonsMethod:
         self.colors = colors
         self.flushing = False
         self.shading = False
-        self.reltol = 1e-6
+        self.reltol = 1e-8
         self.quality=1
         self.altcolors=("#D2ACD3","#8B76A1","#C587AE","#F5B9C9","#FBCDBE","#FDEEC7","#5DBCD2")
         self.useAlts = False
@@ -41,7 +41,7 @@ class NewtonsMethod:
     def useFuncPrime(self, z):
         return self.__funcPrime(z)
 
-    #Reset coordinates in this step. 
+    #Reset coordinates in this step.
     def updateFunc(self, function, symbol):
         self.symbol = symbol
         self.__func = function
