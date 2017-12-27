@@ -7,7 +7,7 @@ Makes use of the following external packages:
 * numpy
 * matplotlib
 
-These can be installed via the updatePackages.sh file by first navigating to the directory the file is in via terminal then typing 
+These can be installed via the updatePackages.sh file by first navigating to the directory the file is in via the command line then by typing:
 
 ```bash updatePackages.sh```
 
