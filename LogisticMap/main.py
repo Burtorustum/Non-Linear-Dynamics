@@ -1,6 +1,9 @@
 #main.py
 import sys
-sys.path.insert(0, '/Users/aburur/Desktop/NonLinear_Dynamics/Utility')
+import os
+path = os.path.dirname(os.path.abspath(__file__))
+path = path.replace("LogisticMap", "Utility")
+sys.path.insert(0, path)
 from BifurcationDiagram import BifurcationDiagram
 from CobwebDiagram import CobwebDiagram
 from getOption import *
