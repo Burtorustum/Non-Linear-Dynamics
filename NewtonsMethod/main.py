@@ -1,4 +1,4 @@
-#main.py
+# main.py
 import sys
 import os
 path = os.path.dirname(os.path.abspath(__file__))
@@ -9,19 +9,21 @@ from sympy import *
 from math import pi
 from getOption import *
 
+
 def main():
     z = symbols('z')
 
     print("\nThis program is for viewing the effects of running Newton's method on polynomials in the complex plane. Please wait while the inital function is drawn (z**3-1)")
     running = True
-    window = NewtonsMethod(func=z**3-1, sym=z, coords=[-1,-1,1,1])
+    window = NewtonsMethod(func=z**3 - 1, sym=z, coords=[-1, -1, 1, 1])
     window.quality = 1.3
     window.draw()
     print("If you need a list of commands type, 'commands'. To quit, type 'quit'.")
     while running:
-        inp = input("\nPlease input a command. If you need a list of commands type, 'commands'.\n")
+        inp = input(
+            "\nPlease input a command. If you need a list of commands type, 'commands'.\n")
 
-        if inp == 'quit' or inp =='q':
+        if inp == 'quit' or inp == 'q':
             running = False
 
         elif inp == 'commands':
@@ -66,7 +68,7 @@ def main():
             window.draw()
 
         elif inp == 'iterates':
-            window.iterations = int(getOption(1,1000))
+            window.iterations = int(getOption(1, 1000))
 
         elif inp == 'roots':
             print(window.roots)
@@ -82,13 +84,15 @@ def main():
                     if rootIn != 'done':
                         print("There was something wrong with your input. Please try again.")
 
-            rootIn = input("Your new roots are: " + str(newRoots) + " Would you like to keep them? y/n? ")
+            rootIn = input("Your new roots are: " + str(newRoots) +
+                           " Would you like to keep them? y/n? ")
             if rootIn == 'y':
                 window.roots = newRoots
 
         elif inp == 'viewshades':
             window.shading = not window.shading
-            print("Toggled shading to", window.shading, "WARNING: VERY SLOW AND LACKLUSTER")
+            print("Toggled shading to", window.shading,
+                  "WARNING: VERY SLOW AND LACKLUSTER")
 
         elif inp == 'redraw':
             print("Drawing. This may take a moment.")
@@ -96,16 +100,16 @@ def main():
 
         elif inp == 'changecoords':
             print("x min:")
-            xMin = getOption(-100,100)
+            xMin = getOption(-100, 100)
             print("x max:")
-            xMax = getOption(-100,100)
+            xMax = getOption(-100, 100)
             print("y min:")
-            yMin = getOption(-100,100)
+            yMin = getOption(-100, 100)
             print("y max:")
-            yMax = getOption(-100,100)
+            yMax = getOption(-100, 100)
             window.window.defaultCoords = [xMin, yMin, xMax, yMax]
 
-        #MAKE INTO SELECTABLE LIST
+        # MAKE INTO SELECTABLE LIST
         elif inp == 'coolfunctions':
             print("7*z**6 - 3*z**3 + 2")
             print("35*z**9 - 180*z**7 + 378*z**5 - 420*z**3 + 315*z")
@@ -118,7 +122,7 @@ def main():
             print("Toggled colflush to", window.flushing)
 
         elif inp == 'reltol':
-            newtol = getOption(0,1)
+            newtol = getOption(0, 1)
             window.reltol = newtol
 
         elif inp == 'quality':
@@ -145,7 +149,7 @@ def main():
                 if inn == 'y':
                     window.iterations = newIterate
 
-        #ADD CHANGE RESOLUTION
+        # ADD CHANGE RESOLUTION
 
 if __name__ == '__main__':
     main()
