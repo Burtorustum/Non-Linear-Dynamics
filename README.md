@@ -11,4 +11,10 @@ These can be installed via the updatePackages.sh file by first navigating to the
 
 ```bash updatePackages.sh```
 
-This will install or update all of the packages required for these scripts. 
+This will install or update all of the packages required for these scripts. Alternatively you can update all of your Python3 packages installed with pip by typing:
+
+```bash updateAllPy3Pack.sh```
+
+And the same goes for Python2 but with the command:
+
+```bash updateAllPy2Pack.sh```
