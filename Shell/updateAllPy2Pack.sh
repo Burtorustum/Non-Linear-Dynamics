@@ -15,4 +15,5 @@ python --version
 pip2 --version
 echo ''
 echo "${txtgrn}All done!${txtrst}"
+echo ''
 exit

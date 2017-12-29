@@ -15,4 +15,5 @@ python3 --version
 pip3 --version
 echo ''
 echo '${txtgrn}All done.${txtrst}'
+echo ''
 exit
