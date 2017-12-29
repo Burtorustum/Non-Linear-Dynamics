@@ -13,3 +13,4 @@ python3 --version
 pip3 --version
 echo ''
 echo 'All done.'
+exit
