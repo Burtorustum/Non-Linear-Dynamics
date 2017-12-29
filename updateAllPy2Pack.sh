@@ -6,7 +6,10 @@ a=`pip3 freeze | sed s/==// | sed s/[0-9][0-9]*//g | sed s/[.]//g`
 for package in $a
 do
   pip2 install $package --upgrade
-  echo ''
+  echo '---------'
 done
+echo ''
+python --version
+pip --version
 echo ''
 echo 'All done!'
