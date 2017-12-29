@@ -3,6 +3,7 @@ Projects for Non-Linear Dynamics class written in Python 3.
 
 Makes use of the following external packages:
 * graphics.py
+* NLDGraphics --> Currently not publicly available will be working on a distribution for this.
 * sympy
 * numpy
 * matplotlib
