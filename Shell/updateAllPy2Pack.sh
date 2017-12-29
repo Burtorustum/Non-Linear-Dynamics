@@ -12,7 +12,7 @@ do
 done
 echo ''
 python --version
-pip --version
+pip2 --version
 echo ''
 echo "${txtgrn}All done!${txtrst}"
 exit
