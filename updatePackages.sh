@@ -1,5 +1,5 @@
 #!/bin/bash
-echo 'Updating packages...'
+echo 'Updating packages for NonLinear_Dynamics in Python3...'
 echo ''
 pip3 install pip-upgrader --upgrade
 pip3 install pip --upgrade
