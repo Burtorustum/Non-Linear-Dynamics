@@ -1,5 +1,7 @@
 #!/bin/bash
-echo 'Updating packages for NonLinear_Dynamics in Python3...'
+. ./colorization.sh
+
+echo '${txtgrn}Updating packages for NonLinear_Dynamics in Python3...${txtrst}'
 echo ''
 pip3 install pip-upgrader --upgrade
 pip3 install pip --upgrade
@@ -12,5 +14,5 @@ echo ''
 python3 --version
 pip3 --version
 echo ''
-echo 'All done.'
+echo '${txtgrn}All done.${txtrst}'
 exit
