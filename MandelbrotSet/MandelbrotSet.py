@@ -4,7 +4,6 @@ from nld_graphics import *
 import numpy as np
 import time as time
 import matplotlib.pyplot as plt
-import matplotlib.colors as color
 
 class MandelbrotSet:
 
