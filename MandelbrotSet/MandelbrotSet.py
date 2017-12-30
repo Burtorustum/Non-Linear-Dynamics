@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 class MandelbrotSet:
 
     def __init__ (self, pixelWidth, pixelHeight):
-        self.coords = [-2.1,-1.4,.8,1.4]
-        self.window = NLDGraphWin("Complex Plane", pixelWidth, pixelHeight, self.coords)
+        self.window = NLDGraphWin("Complex Plane", pixelWidth, pixelHeight, [-2.1,-1.4,.8,1.4])
+        self.zoomcount = 0
 
     def numPlotSet(self, maxIterates=100):
         y, x = np.ogrid[-1.4:1.4:self.window.height*1j, -2.1:0.8:self.window.width*1j]
@@ -28,7 +28,7 @@ class MandelbrotSet:
 
     def regPlotSet(self, maxIterates=5000, fill = False):
         start = time.time()
-        y, x = np.ogrid[self.coords[1]:self.coords[3]:self.window.height*1j, self.coords[0]:self.coords[2]:self.window.width*1j]
+        y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
         z = c
         divergeIter = maxIterates + np.zeros(z.shape, dtype=int)
@@ -45,14 +45,24 @@ class MandelbrotSet:
                 z = c[i][ii]
                 it = divergeIter[i][ii]
                 if it != maxIterates:
-                    color = 255 - it * 10
-                    if color < 5:
+                    color = 255 - it * abs(10 - 3 * zoomcount)
+                    if color < 5 & fill:
                         color = 5
+                    elif color < 5:
+                        color = 0
                     self.window.plot(z.real, z.imag, color_rgb(color, color, color))
                 elif fill:
                     self.window.plot(z.real, z.imag, color_rgb(0, 0, 0))
         self.window.update()
         print("runtime:", time.time()-start)
+
+    def zoom(self, inout="in"):
+        if inout == "in":
+            zoomcount += 1
+        else:
+            zoomcount = 0
+        self.window.zoom(inout)
+        self.regPlotSet()
 
 
 m = MandelbrotSet(800, 800)
@@ -63,5 +73,7 @@ m = MandelbrotSet(800, 800)
 
 #Using graphics.py:
 m.regPlotSet()
+m.zoom()
+m.window.getMouse()
 m.window.getMouse()
 m.window.close()
