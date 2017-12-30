@@ -47,7 +47,7 @@ class MandelbrotSet:
                 it = divergeIter[i][ii]
                 if it != maxIterates:
                     z = c[i][ii]
-                    color = 255 - it * 5
+                    color = 255 - it * 10
                     if color < 5:
                         color = 5
                     self.window.plot(z.real, z.imag, color_rgb(color, 0, 0))
