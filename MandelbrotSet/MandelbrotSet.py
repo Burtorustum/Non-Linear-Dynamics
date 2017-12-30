@@ -43,7 +43,7 @@ class MandelbrotSet:
             for ii in range(len(c[i])):
                 it = divergeIter[i][ii]
                 if it != maxIterates:
-                    color = 250 - it * 10
+                    color = 255 - it * 10
                 #if diverge[i][ii]:
                     #color = 255 - divergeIter[i][ii] * 10
                     z = c[i][ii]
