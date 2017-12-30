@@ -45,7 +45,7 @@ class MandelbrotSet:
                 z = c[i][ii]
                 it = divergeIter[i][ii]
                 if it != maxIterates:
-                    color = 255 - it * abs(10 - 3 * self.zoomcount)
+                    color = 255 - it * abs(10 - 2 * self.zoomcount)
                     if color < 5 & fill:
                         color = 5
                     elif color < 5:
