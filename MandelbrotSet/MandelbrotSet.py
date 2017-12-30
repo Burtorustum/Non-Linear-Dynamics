@@ -50,14 +50,14 @@ class MandelbrotSet:
                     if color < 5:
                         color = 5
                     self.window.plot(z.real, z.imag, color_rgb(color, color, color))
-                else if fill:
+                elif fill:
                     z = c[i][ii]
                     self.window.plot(z.real, z.imag, color_rgb(0, 0, 0))
         self.window.update()
         print("runtime:", time.time()-start)
 
 
-m = MandelbrotSet(800, 800)
+m = MandelbrotSet(960, 960)
 
 #Using matplotlib:
 #numoutput = m.numPlotSet()
