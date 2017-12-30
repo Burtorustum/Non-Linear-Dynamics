@@ -48,7 +48,7 @@ class MandelbrotSet:
                     color = 255 - divergeIter[i][ii] * 10
                     z = c[i][ii]
                     if color < 5:
-                        color = 2
+                        color = 1
                     self.window.plot(z.real, z.imag, color_rgb(color, color, color))
         self.window.update()
         print("runtime:", time.time()-start)
