@@ -45,7 +45,7 @@ class MandelbrotSet:
                 z = c[i][ii]
                 it = divergeIter[i][ii]
                 if it != maxIterates:
-                    color = 255 - it * abs(10 - 3 * zoomcount)
+                    color = 255 - it * abs(10 - 3 * self.zoomcount)
                     if color < 5 & fill:
                         color = 5
                     elif color < 5:
@@ -58,9 +58,9 @@ class MandelbrotSet:
 
     def zoom(self, inout="in"):
         if inout == "in":
-            zoomcount += 1
+            self.zoomcount += 1
         else:
-            zoomcount = 0
+            self.zoomcount = 0
         self.window.zoom(inout)
         self.regPlotSet()
 
@@ -74,6 +74,8 @@ m = MandelbrotSet(800, 800)
 #Using graphics.py:
 m.regPlotSet()
 m.zoom()
+m.zoom()
 m.window.getMouse()
+m.zoom(inout="out")
 m.window.getMouse()
 m.window.close()
