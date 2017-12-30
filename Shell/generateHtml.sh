@@ -6,3 +6,4 @@ rm ../MandelbrotSet/MandelbrotSet.html
 jupyter nbconvert --to html ../MandelbrotSet/MandelbrotSet.ipynb
 echo ''
 echo 'Conversion complete!'
+exit
