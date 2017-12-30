@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 class MandelbrotSet:
 
     def __init__ (self, pixelWidth, pixelHeight):
-        self.window = NLDGraphWin("Complex Plane", pixelWidth, pixelHeight, [-2.1,-1.4,.8,1.4])
+        self.coords = [-2.1,-1.4,.8,1.4]
+        self.window = NLDGraphWin("Complex Plane", pixelWidth, pixelHeight, self.coords)
 
     def numPlotSet(self, maxIterates=100):
         y, x = np.ogrid[-1.4:1.4:self.window.height*1j, -2.1:0.8:self.window.width*1j]
@@ -57,7 +58,7 @@ class MandelbrotSet:
         print("runtime:", time.time()-start)
 
 
-m = MandelbrotSet(960, 960)
+m = MandelbrotSet(800, 800)
 
 #Using matplotlib:
 #numoutput = m.numPlotSet()
