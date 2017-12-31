@@ -1,5 +1,4 @@
 #MandelbrotSet.py
-from graphics import *
 from nld_graphics import *
 import numpy as np
 import time as time
@@ -52,17 +51,17 @@ class MandelbrotSet:
                         color = 0
                     self.window.plot(z.real, z.imag, color_rgb(color, color, color))
                 elif fill:
-                    self.window.plot(z.real, z.imag, color_rgb(0, 0, 0))
+                    self.window.plot(z.real, z.imag, color_rgb(100, 0, 0))
         self.window.update()
         print("runtime:", time.time()-start)
 
-    def zoom(self, inout="in"):
+    def zoom(self, inout="in", fill=False):
         if inout == "in":
             self.zoomcount += 1
         else:
             self.zoomcount = 0
         self.window.zoom(inout)
-        self.regPlotSet()
+        self.regPlotSet(fill=fill)
 
 
 m = MandelbrotSet(800, 800)
@@ -72,10 +71,10 @@ m = MandelbrotSet(800, 800)
 #plt.imshow(numoutput)
 
 #Using graphics.py:
-m.regPlotSet()
-m.zoom()
-m.zoom()
+m.regPlotSet(fill = True)
+m.zoom(True)
+m.zoom(True)
 m.window.getMouse()
-m.zoom(inout="out")
+m.zoom(inout="out", fill=True)
 m.window.getMouse()
 m.window.close()
