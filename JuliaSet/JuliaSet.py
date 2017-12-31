@@ -49,6 +49,6 @@ class JuliaSet:
         self.regPlotSet(fill=fill)
 
 m = JuliaSet(800, 800)
-m.regPlotSet(fill = True)
+m.regPlotSet(fill = True, const = -1j)
 m.window.getMouse()
 m.window.close()
