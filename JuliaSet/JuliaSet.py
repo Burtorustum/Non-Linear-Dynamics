@@ -9,7 +9,7 @@ class JuliaSet:
         self.window = NLDGraphWin("Complex Plane", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.zoomcount = 0
 
-    def regPlotSet(self, maxIterates=500, const = .365 - 0.37j, fill = False):
+    def regPlotSet(self, maxIterates=1000, const = .365 - 0.37j, fill = False):
         start = time.time()
         y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
