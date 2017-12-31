@@ -28,6 +28,7 @@ class JuliaSet:
                 z = c[i][ii]
                 it = divergeIter[i][ii]
                 if it != maxIterates:
+                    #TODO: Need to add layering to the colors... not only grayscale but over some iterate start redscale or something
                     color = 255 - it * abs(8 - 2 * self.zoomcount)
                     if color < 5 & fill:
                         color = 5
