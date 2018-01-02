@@ -52,7 +52,7 @@ class MandelbrotSet:
                     self.window.plot(z.real, z.imag, color_rgb(color, color, color))
                 elif fill:
                     z = c[i][ii]
-                    self.window.plot(z.real, z.imag, color_rgb(100, 0, 0))
+                    self.window.plot(z.real, z.imag, color_rgb(0, 0, 0))
         self.window.update()
         print("runtime:", time.time()-start)
 
@@ -72,7 +72,7 @@ m = MandelbrotSet(800, 800)
 #plt.imshow(numoutput)
 
 #Using graphics.py:
-m.regPlotSet(fill = False)
+m.regPlotSet(fill = True)
 m.window.getMouse()
 m.window.getMouse()
 m.window.close()
