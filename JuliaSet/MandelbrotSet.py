@@ -8,6 +8,7 @@ class MandelbrotSet:
 
     def __init__ (self, pixelWidth, pixelHeight):
         self.window = NLDGraphWin("Mandelbrot Set", pixelWidth, pixelHeight, [-2.1,-1.4,.8,1.4])
+        self.window.setBackground('black')
         self.zoomcount = 0
         self.oldScheme = False
 
@@ -26,7 +27,7 @@ class MandelbrotSet:
 
         return divergeIter
 
-    def regPlotSet(self, maxIterates=200, fill = False):
+    def regPlotSet(self, maxIterates=250):
         start = time.time()
         y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
@@ -45,43 +46,24 @@ class MandelbrotSet:
                 it = divergeIter[i][ii]
                 if it != maxIterates:
                     z = c[i][ii]
-                    if self.oldScheme:
-                        color = 255 - it * 5
-                        if color < 5 & fill:
-                            color = 5
-                        elif color < 5:
-                            color = 0
-                        self.window.plot(z.real, z.imag, color_rgb(color, color, color))
+                    if it <= 20:
+                        color = it * 10 + 50
+                        self.window.plot(z.real, z.imag, color_rgb(0, 0, color))
                     else:
-                        if it < 25:
-                            color = 255 - it * 10
-                            self.window.plot(z.real, z.imag, color_rgb(color, color, color))
-                        elif it < 50:
-                            color = 255 - it * 10
-                            self.window.plot(z.real, z.imag, color_rgb(0, 0, color))
-                        elif it < 75:
-                            color = 255 - it * 10
-                            self.window.plot(z.real, z.imag, color_rgb(color, 0, 0))
-                        else:
-                            color = 255 - it * 5
-                            if color < 0:
-                                color = 1
-                            self.window.plot(z.real, z.imag, color_rgb(0, color, 0))
-
-
-                elif fill:
-                    z = c[i][ii]
-                    self.window.plot(z.real, z.imag, color_rgb(0,0,0))
+                        color = 255 - it * 6
+                        if color < 0:
+                            color = 1
+                        self.window.plot(z.real, z.imag, color_rgb(color, 0, 0))
         self.window.update()
         print("runtime:", time.time()-start)
 
-    def zoom(self, inout="in", fill=False):
+    def zoom(self, inout="in", iterates=250):
         if inout == "in":
             self.zoomcount += 1
         else:
             self.zoomcount = 0
         self.window.zoom(inout)
-        self.regPlotSet(fill=fill)
+        self.regPlotSet(maxIterates=iterates)
 
 
 m = MandelbrotSet(800, 800)
@@ -91,7 +73,8 @@ m = MandelbrotSet(800, 800)
 #plt.imshow(numoutput)
 
 #Using graphics.py:
-m.regPlotSet(fill = True)
-m.window.getMouse()
+m.regPlotSet()
+m.zoom(iterates=500)
+m.zoom(iterates=1000)
 m.window.getMouse()
 m.window.close()
