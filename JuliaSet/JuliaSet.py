@@ -18,7 +18,7 @@ class JuliaSet:
 
         for i in range(maxIterates):
             z = z**2 + const
-            diverge = abs(z) >= 1000
+            diverge = abs(z) >= 5000
             divergingNow = diverge & (divergeIter == maxIterates)
             divergeIter[divergingNow] = i
             z[diverge] = 2

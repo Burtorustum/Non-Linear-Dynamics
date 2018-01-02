@@ -25,7 +25,7 @@ class MandelbrotSet:
 
         return divergeIter
 
-    def regPlotSet(self, maxIterates=5000, fill = False):
+    def regPlotSet(self, maxIterates=1000, fill = False):
         start = time.time()
         y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
@@ -73,8 +73,6 @@ m = MandelbrotSet(800, 800)
 
 #Using graphics.py:
 m.regPlotSet(fill = True)
-m.zoom(True)
-m.zoom(True)
 m.window.getMouse()
 m.zoom(inout="out", fill=True)
 m.window.getMouse()
