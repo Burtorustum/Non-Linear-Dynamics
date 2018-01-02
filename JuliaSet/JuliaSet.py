@@ -29,7 +29,7 @@ class JuliaSet:
                 if it != maxIterates:
                     #TODO: Need to add layering to the colors... not only grayscale but over some iterate start redscale or something
                     z = c[i][ii]
-                    color = 255 - it * 3
+                    color = 255 - it * 5
                     if color < 5 & fill:
                         color = 5
                     elif color < 5:
@@ -50,7 +50,7 @@ class JuliaSet:
         self.regPlotSet(fill=fill)
 
 m = JuliaSet(800, 800)
-m.regPlotSet(fill = False, const= -0.8+0.156j)
+m.regPlotSet(fill = False, const= -0.835-0.2321j)
 #0
 #1j
 #-1j
