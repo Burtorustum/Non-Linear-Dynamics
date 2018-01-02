@@ -10,7 +10,7 @@ def main():
     #      Color Schemes
     #      Allow user to change num of iterates
     #      Optimize iterate amount based on zoom
-    #      
+    #      Functional inverse method 
     while running:
         None;
 
