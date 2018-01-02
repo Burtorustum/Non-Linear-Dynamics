@@ -49,7 +49,7 @@ class JuliaSet:
         self.regPlotSet(fill=fill)
 
 m = JuliaSet(800, 800)
-m.regPlotSet(fill = True, const = -0.77 + 0.22j)
+m.regPlotSet(fill = False, const= -0.123 + 0.745j)
 #0
 #1j
 #-1j

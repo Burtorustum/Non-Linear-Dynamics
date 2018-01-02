@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 class MandelbrotSet:
 
     def __init__ (self, pixelWidth, pixelHeight):
-        self.window = NLDGraphWin("Complex Plane", pixelWidth, pixelHeight, [-2.1,-1.4,.8,1.4])
+        self.window = NLDGraphWin("Mandelbrot Set", pixelWidth, pixelHeight, [-2.1,-1.4,.8,1.4])
         self.zoomcount = 0
 
     def numPlotSet(self, maxIterates=100):
@@ -72,8 +72,7 @@ m = MandelbrotSet(800, 800)
 #plt.imshow(numoutput)
 
 #Using graphics.py:
-m.regPlotSet(fill = True)
+m.regPlotSet(fill = False)
 m.window.getMouse()
-m.zoom(inout="out", fill=True)
 m.window.getMouse()
 m.window.close()
