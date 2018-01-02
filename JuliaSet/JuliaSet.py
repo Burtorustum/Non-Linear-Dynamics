@@ -25,10 +25,10 @@ class JuliaSet:
 
         for i in range(len(c)):
             for ii in range(len(c[i])):
-                z = c[i][ii]
                 it = divergeIter[i][ii]
                 if it != maxIterates:
                     #TODO: Need to add layering to the colors... not only grayscale but over some iterate start redscale or something
+                    z = c[i][ii]
                     color = 255 - it * abs(8 - 2 * self.zoomcount)
                     if color < 5 & fill:
                         color = 5
@@ -36,6 +36,7 @@ class JuliaSet:
                         color = 0
                     self.window.plot(z.real, z.imag, color_rgb(color, color, color))
                 elif fill:
+                    z = c[i][ii]
                     self.window.plot(z.real, z.imag, color_rgb(100, 0, 0))
         self.window.update()
         print("runtime:", time.time()-start)
