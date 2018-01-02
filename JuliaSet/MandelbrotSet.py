@@ -9,6 +9,7 @@ class MandelbrotSet:
     def __init__ (self, pixelWidth, pixelHeight):
         self.window = NLDGraphWin("Mandelbrot Set", pixelWidth, pixelHeight, [-2.1,-1.4,.8,1.4])
         self.zoomcount = 0
+        self.oldScheme = False
 
     def numPlotSet(self, maxIterates=100):
         y, x = np.ogrid[-1.4:1.4:self.window.height*1j, -2.1:0.8:self.window.width*1j]
@@ -44,15 +45,33 @@ class MandelbrotSet:
                 it = divergeIter[i][ii]
                 if it != maxIterates:
                     z = c[i][ii]
-                    color = 255 - it * 5
-                    if color < 5 & fill:
-                        color = 5
-                    elif color < 5:
-                        color = 0
-                    self.window.plot(z.real, z.imag, color_rgb(color, color, color))
+                    if self.oldScheme:
+                        color = 255 - it * 5
+                        if color < 5 & fill:
+                            color = 5
+                        elif color < 5:
+                            color = 0
+                        self.window.plot(z.real, z.imag, color_rgb(color, color, color))
+                    else:
+                        if it < 25:
+                            color = 255 - it * 10
+                            self.window.plot(z.real, z.imag, color_rgb(color, color, color))
+                        elif it < 50:
+                            color = 255 - it * 10
+                            self.window.plot(z.real, z.imag, color_rgb(0, 0, color))
+                        elif it < 75:
+                            color = 255 - it * 10
+                            self.window.plot(z.real, z.imag, color_rgb(color, 0, 0))
+                        else:
+                            color = 255 - it * 5
+                            if color < 0:
+                                color = 1
+                            self.window.plot(z.real, z.imag, color_rgb(0, color, 0))
+
+
                 elif fill:
                     z = c[i][ii]
-                    self.window.plot(z.real, z.imag, color_rgb(0, 0, 0))
+                    self.window.plot(z.real, z.imag, color_rgb(0,0,0))
         self.window.update()
         print("runtime:", time.time()-start)
 
