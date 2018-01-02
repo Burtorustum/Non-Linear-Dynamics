@@ -25,7 +25,7 @@ class MandelbrotSet:
 
         return divergeIter
 
-    def regPlotSet(self, maxIterates=1000, fill = False):
+    def regPlotSet(self, maxIterates=200, fill = False):
         start = time.time()
         y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
@@ -44,7 +44,7 @@ class MandelbrotSet:
                 it = divergeIter[i][ii]
                 if it != maxIterates:
                     z = c[i][ii]
-                    color = 255 - it * abs(10 - 2 * self.zoomcount)
+                    color = 255 - it * 5
                     if color < 5 & fill:
                         color = 5
                     elif color < 5:
