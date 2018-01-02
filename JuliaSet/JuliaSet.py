@@ -9,7 +9,7 @@ class JuliaSet:
         self.window = NLDGraphWin("Complex Plane", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.zoomcount = 0
 
-    def regPlotSet(self, maxIterates=200, const = .365 - 0.37j, fill = False):
+    def regPlotSet(self, maxIterates = 750, const = .365 - 0.37j, fill = False):
         start = time.time()
         y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
@@ -18,7 +18,7 @@ class JuliaSet:
 
         for i in range(maxIterates):
             z = z**2 + const
-            diverge = abs(z) >= 5
+            diverge = abs(z) >= 3
             divergingNow = diverge & (divergeIter == maxIterates)
             divergeIter[divergingNow] = i
             z[diverge] = 2
@@ -50,7 +50,7 @@ class JuliaSet:
         self.regPlotSet(fill=fill)
 
 m = JuliaSet(800, 800)
-m.regPlotSet(fill = False, const= -0.835-0.2321j)
+m.regPlotSet(fill = False, const= -0.4+0.6j)
 #0
 #1j
 #-1j
@@ -58,6 +58,8 @@ m.regPlotSet(fill = False, const= -0.835-0.2321j)
 #-0.77 + 0.22j
 #.365 - 0.37j
 #-0.8+0.156j
+#-0.835-0.2321j
+#-0.4+0.6j
 #0.279
 m.window.getMouse()
 m.window.close()
