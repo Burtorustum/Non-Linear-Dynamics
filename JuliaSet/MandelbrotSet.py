@@ -27,7 +27,7 @@ class MandelbrotSet:
 
         return divergeIter
 
-    def regPlotSet(self, maxIterates=250):
+    def regPlotSet(self, maxIterates=500):
         start = time.time()
         y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
@@ -46,22 +46,27 @@ class MandelbrotSet:
                 it = divergeIter[i][ii]
                 if it != maxIterates:
                     z = c[i][ii]
-                    if it <= 20:
-                        color = it * 10 + 50
+                    if it <= 40:
+                        color = it * 6 + 50
+                        if color > 255:
+                            color = 255
                         self.window.plot(z.real, z.imag, color_rgb(0, 0, color))
+                    #elif it > 40:
+                        #color = 255 - it
+                        #while color <= 0:
+                            #color = 255 - abs(.98 * color)
+                        #color = int(color)
+                        #self.window.plot(z.real, z.imag, color_rgb(color, color, color))
                     else:
-                        color = 255 - it * 6
+                        color = 255 - it * 3
                         if color < 0:
                             color = 1
-                        self.window.plot(z.real, z.imag, color_rgb(color, 0, 0))
+                            self.window.plot(z.real, z.imag, color_rgb(color, color * 10, 0))
         self.window.update()
         print("runtime:", time.time()-start)
 
+    #TODO: Force coordinates to hold ratio.
     def zoom(self, inout="in", iterates=250):
-        if inout == "in":
-            self.zoomcount += 1
-        else:
-            self.zoomcount = 0
         self.window.zoom(inout)
         self.regPlotSet(maxIterates=iterates)
 
@@ -73,8 +78,9 @@ m = MandelbrotSet(800, 800)
 #plt.imshow(numoutput)
 
 #Using graphics.py:
-m.regPlotSet()
-m.zoom(iterates=500)
+m.regPlotSet(maxIterates=50)
 m.zoom(iterates=1000)
+m.zoom(iterates=5000)
+
 m.window.getMouse()
 m.window.close()
