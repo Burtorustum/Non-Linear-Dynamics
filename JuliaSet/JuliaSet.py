@@ -54,7 +54,7 @@ class JuliaSet:
         for i in range (10000):
             z = g(z)
 
-        for i in range(10000):
+        for i in range(5000):
             z = g(z)
             self.lqwindow.plot(z.real, z.imag, 'black')
 
@@ -66,13 +66,13 @@ class JuliaSet:
         self.regPlotSet(fill=fill)
 
 m = JuliaSet(800, 800)
-m.regPlotSet(const = 0.35)
-m.hqwindow.getMouse()
-m.hqwindow.close()
+#m.regPlotSet(const = 0.35)
+#m.hqwindow.getMouse()
+#m.hqwindow.close()
 
-#m.inversePlotSet()
-#m.lqwindow.getMouse()
-#m.lqwindow.close()
+m.inversePlotSet()
+m.lqwindow.getMouse()
+m.lqwindow.close()
 
 
 #0
