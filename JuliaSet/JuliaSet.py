@@ -74,7 +74,6 @@ m.inversePlotSet()
 m.lqwindow.getMouse()
 m.lqwindow.close()
 
-
 #0
 #1j
 #-1j
