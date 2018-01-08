@@ -71,16 +71,17 @@ class MandelbrotSet:
         self.regPlotSet(maxIterates=iterates)
 
 
-m = MandelbrotSet(800, 800)
+if __name__ == "__main__":
+    m = MandelbrotSet(800, 800)
 
-#Using matplotlib:
-#numoutput = m.numPlotSet()
-#plt.imshow(numoutput)
+    #Using matplotlib:
+    #numoutput = m.numPlotSet()
+    #plt.imshow(numoutput)
 
-#Using graphics.py:
-m.regPlotSet(maxIterates=50)
-m.zoom(iterates=1000)
-m.zoom(iterates=5000)
+    #Using graphics.py:
+    m.regPlotSet(maxIterates=50)
+    m.zoom(iterates=1000)
+    m.zoom(iterates=5000)
 
-m.window.getMouse()
-m.window.close()
+    m.window.getMouse()
+    m.window.close()

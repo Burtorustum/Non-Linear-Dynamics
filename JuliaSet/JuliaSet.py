@@ -7,8 +7,8 @@ from random import random
 
 class JuliaSet:
     def __init__ (self, pixelWidth, pixelHeight):
-        self.hqwindow = NLDGraphWin("HQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.lqwindow = NLDGraphWin("LQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
+        self.hqwindow = NLDGraphWin("HQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
 
     def regPlotSet(self, maxIterates = 750, const = .365 - 0.37j, fill = False):
         start = time.time()
@@ -65,14 +65,15 @@ class JuliaSet:
         self.hqwindow.zoom(inout)
         self.regPlotSet(fill=fill)
 
-m = JuliaSet(800, 800)
-#m.regPlotSet(const = 0.35)
-#m.hqwindow.getMouse()
-#m.hqwindow.close()
+if __name__ == '__main__':
+    m = JuliaSet(800, 800)
+    #m.regPlotSet(const = 0.35)
+    #m.hqwindow.getMouse()
+    #m.hqwindow.close()
 
-m.inversePlotSet()
-m.lqwindow.getMouse()
-m.lqwindow.close()
+    m.inversePlotSet()
+    m.lqwindow.getMouse()
+    m.lqwindow.close()
 
 #0
 #1j
