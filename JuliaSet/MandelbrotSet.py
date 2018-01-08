@@ -27,7 +27,7 @@ class MandelbrotSet:
 
         return divergeIter
 
-    def regPlotSet(self, maxIterates=250):
+    def regPlotSet(self, maxIterates=50):
         start = time.time()
         y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
@@ -51,19 +51,13 @@ class MandelbrotSet:
                         if color > 255:
                             color = 255
                         self.window.plot(z.real, z.imag, color_rgb(0, 0, color))
-                    #elif it > 40:
-                        #color = 255 - it
-                        #while color <= 0:
-                            #color = 255 - abs(.98 * color)
-                        #color = int(color)
-                        #self.window.plot(z.real, z.imag, color_rgb(color, color, color))
                     else:
                         color = 255 - it * 3
                         if color < 0:
                             color = 1
                             self.window.plot(z.real, z.imag, color_rgb(color, color * 10, 0))
         self.window.update()
-        print("runtime:", time.time()-start)
+        #print("Mandelbrot Runtime:", time.time()-start)
 
     #TODO: Force coordinates to hold ratio.
     def zoom(self, inout="in", iterates=250):
