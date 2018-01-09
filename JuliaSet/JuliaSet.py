@@ -9,8 +9,9 @@ class JuliaSet:
     def __init__ (self, pixelWidth, pixelHeight):
         self.lqwindow = NLDGraphWin("LQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.hqwindow = NLDGraphWin("HQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
+        self.hqwindow.setBackground('black')
 
-    def regPlotSet(self, maxIterates = 2000, const = .365 - 0.37j, fill = False):
+    def regPlotSet(self, maxIterates = 2000, const = .365 - 0.37j):
         start = time.time()
         y, x = np.ogrid[self.hqwindow.currentCoords[1]:self.hqwindow.currentCoords[3]:self.hqwindow.height*1j, self.hqwindow.currentCoords[0]:self.hqwindow.currentCoords[2]:self.hqwindow.width*1j]
         c = x + y*1j
@@ -30,15 +31,16 @@ class JuliaSet:
                 if it != maxIterates:
                     #TODO: Need to add layering to the colors... not only grayscale but over some iterate start redscale or something
                     z = c[i][ii]
-                    color = 255 - it * 5
-                    if color < 5 & fill:
-                        color = 5
-                    elif color < 5:
-                        color = 0
-                    self.hqwindow.plot(z.real, z.imag, color_rgb(color, color, color))
-                elif fill:
-                    z = c[i][ii]
-                    self.hqwindow.plot(z.real, z.imag, color_rgb(100, 0, 0))
+                    if it <= 40:
+                        color = it * 6 + 50
+                        if color > 255:
+                            color = 255
+                        self.hqwindow.plot(z.real, z.imag, color_rgb(0, 0, color))
+                    else:
+                        color = 255 - it * 3
+                        if color < 0:
+                            color = 1
+                            self.hqwindow.plot(z.real, z.imag, color_rgb(color, color * 10, 0))
         self.hqwindow.update()
         print("HQ Runtime:", time.time()-start, "for a c value of:", const)
 
