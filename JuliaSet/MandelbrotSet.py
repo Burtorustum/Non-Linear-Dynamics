@@ -59,7 +59,7 @@ class MandelbrotSet:
         self.window.update()
         #print("Mandelbrot Runtime:", time.time()-start)
 
-    #TODO: Force coordinates to hold ratio.
+    #TODO: Force coordinates to hold aspect ratio.
     def zoom(self, inout="in", iterates=250):
         self.window.zoom(inout)
         self.regPlotSet(maxIterates=iterates)
