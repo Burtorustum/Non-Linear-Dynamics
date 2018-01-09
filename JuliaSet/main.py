@@ -18,7 +18,7 @@ def main():
     #TODO:
     #      Choose point on MandelbrotSet and draw corresponding julia Set
     #      Manually input a c value
-    #      Color Schemes?
+    #      Multiple color schemes?
     #      Allow user to change num of iterates / quality
     #      Optimize iterate amount based on zoom
     while running:
@@ -26,7 +26,7 @@ def main():
         point = mandelbrot.window.getMouse()
         julia.lqwindow.clear()
         julia.inversePlotSet(const=complex(point.x, point.y))
-        inp = input("Would you like to draw a high quality render of this point" + str(complex(point.x, point.y)) + "? y/n \n")
+        inp = input("Would you like to draw a high quality render of the point " + str(complex(point.x, point.y)) + " ? y/n \n")
         if inp == 'y':
             julia.hqwindow.clear()
             julia.regPlotSet(const = complex(point.x, point.y))
