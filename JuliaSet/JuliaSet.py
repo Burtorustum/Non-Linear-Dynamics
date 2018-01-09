@@ -41,6 +41,9 @@ class JuliaSet:
                         if color < 0:
                             color = 1
                             self.hqwindow.plot(z.real, z.imag, color_rgb(color, color * 10, 0))
+                else:
+                    z = c[i][ii]
+                    self.hqwindow.plot(z.real, z.imag, color_rgb(220,120,120))
         self.hqwindow.update()
         print("HQ Runtime:", time.time()-start, "for a c value of:", const)
 
