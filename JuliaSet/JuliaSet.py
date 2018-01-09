@@ -9,7 +9,7 @@ class JuliaSet:
     def __init__ (self, pixelWidth, pixelHeight):
         self.lqwindow = NLDGraphWin("LQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.hqwindow = NLDGraphWin("HQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
-        self.hqwindow.setBackground('black')
+        self.hqwindow.setBackground(color_rgb(75,75,255))
 
     def regPlotSet(self, maxIterates = 2000, const = .365 - 0.37j):
         start = time.time()
@@ -29,7 +29,6 @@ class JuliaSet:
             for ii in range(len(c[i])):
                 it = divergeIter[i][ii]
                 if it != maxIterates:
-                    #TODO: Need to add layering to the colors... not only grayscale but over some iterate start redscale or something
                     z = c[i][ii]
                     if it <= 40:
                         color = it * 6 + 50
@@ -41,9 +40,6 @@ class JuliaSet:
                         if color < 0:
                             color = 1
                             self.hqwindow.plot(z.real, z.imag, color_rgb(color, color * 10, 0))
-                else:
-                    z = c[i][ii]
-                    self.hqwindow.plot(z.real, z.imag, color_rgb(220,120,120))
         self.hqwindow.update()
         print("HQ Runtime:", time.time()-start, "for a c value of:", const)
 
@@ -54,7 +50,7 @@ class JuliaSet:
                 i = -1
             return i * (z-c) ** 0.5
         start = time.time()
-        z = complex(-1000 + 2000 *random(), -1000 + 2000*random())
+        z = complex(-3+ 3 *random(), -3+ 3*random())
 
         for i in range (10000):
             z = g(z)
