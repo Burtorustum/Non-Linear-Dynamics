@@ -65,7 +65,7 @@ class JuliaSet:
 
     def zoom(self, inout="in", iterates=250, fill=False, constan = .365 - 0.37j):
         self.hqwindow.zoom(inout)
-        self.regPlotSet(fill=fill, const = constan)
+        self.regPlotSet(const = constan)
 
 if __name__ == '__main__':
     m = JuliaSet(800, 800)
