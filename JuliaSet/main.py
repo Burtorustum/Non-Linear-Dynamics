@@ -8,9 +8,6 @@ from getOption import *
 from MandelbrotSet import *
 from JuliaSet import *
 
-global constant
-constant = .365 - 0.37j
-
 def main():
     running = True
     print("This program is for viewing Julia Sets with varying c values as well as the Mandelbrot Set.\n")
@@ -24,6 +21,7 @@ def main():
     julia.lqwindow.update()
     julia.hqwindow.update()
 
+    constant = .365 - 0.37j
 
     #TODO:
     #      Manually input a c value
@@ -44,9 +42,9 @@ def main():
         if inp == '0':
             running = False
         elif inp == '1':
-            choosePoint(julia=julia, mandelbrot=mandelbrot)
+            constant = choosePoint(julia=julia, mandelbrot=mandelbrot)
         elif inp == '2':
-            inputC(julia=julia)
+            constant = inputC(julia=julia)
         elif inp == '3':
             julia.maxIterates = int(getOption(1, 100000))
             julia.hqwindow.clear()
@@ -72,10 +70,11 @@ def choosePoint(julia, mandelbrot):
     point = mandelbrot.window.getMouse()
     julia.lqwindow.clear()
     julia.inversePlotSet(const=complex(point.x, point.y))
-    inp = input("Would you like to draw a high quality render of the point " + str(complex(point.x, point.y)) + " ? y/n \n")
+    inp = input("Would you like to draw a high quality render of the point " + str(complex(point.x, point.y)) + "? (y/n) ")
     if inp == 'y':
         julia.hqwindow.clear()
         julia.regPlotSet(const=complex(point.x, point.y))
+        return complex(point.x, point.y)
 
 def inputC(julia):
     invalid = True
@@ -88,10 +87,11 @@ def inputC(julia):
             print("Try again please.")
     julia.lqwindow.clear()
     julia.inversePlotSet(const=constant)
-    inp = input("Would you like to draw a high quality render of the point " + str(constant) + " ? y/n: ")
+    inp = input("Would you like to draw a high quality render of the point " + str(constant) + "? (y/n) ")
     if inp == 'y':
         julia.hqwindow.clear()
         julia.regPlotSet(const=constant)
+        return constant
 
 
 if __name__ == '__main__':
