@@ -2,7 +2,7 @@
 import sys
 import os
 path = os.path.dirname(os.path.abspath(__file__))
-path = path.replace("LogisticMap", "Utility")
+path = path.replace("NewtonsMethod", "Utility")
 sys.path.insert(0, path)
 from NewtonsMethod import NewtonsMethod
 from sympy import *
