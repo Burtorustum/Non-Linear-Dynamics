@@ -9,8 +9,7 @@ class MandelbrotSet:
     def __init__ (self, pixelWidth, pixelHeight):
         self.window = NLDGraphWin("Mandelbrot Set", pixelWidth, pixelHeight, [-2.1,-1.4,.8,1.4])
         self.window.setBackground('black')
-        self.zoomcount = 0
-        self.oldScheme = False
+        self.maxIterates = 50
 
     def numPlotSet(self, maxIterates=100):
         y, x = np.ogrid[-1.4:1.4:self.window.height*1j, -2.1:0.8:self.window.width*1j]
@@ -27,24 +26,24 @@ class MandelbrotSet:
 
         return divergeIter
 
-    def regPlotSet(self, maxIterates=50):
+    def regPlotSet(self):
         start = time.time()
         y, x = np.ogrid[self.window.currentCoords[1]:self.window.currentCoords[3]:self.window.height*1j, self.window.currentCoords[0]:self.window.currentCoords[2]:self.window.width*1j]
         c = x + y*1j
         z = c
-        divergeIter = maxIterates + np.zeros(z.shape, dtype=int)
+        divergeIter = self.maxIterates + np.zeros(z.shape, dtype=int)
 
-        for i in range(maxIterates):
+        for i in range(self.maxIterates):
             z = z**2 + c
             diverge = abs(z) >= 2
-            divergingNow = diverge & (divergeIter == maxIterates)
+            divergingNow = diverge & (divergeIter == self.maxIterates)
             divergeIter[divergingNow] = i
             z[diverge] = 2
 
         for i in range(len(c)):
             for ii in range(len(c[i])):
                 it = divergeIter[i][ii]
-                if it != maxIterates:
+                if it != self.maxIterates:
                     z = c[i][ii]
                     if it <= 40:
                         color = it * 6 + 50
@@ -60,9 +59,9 @@ class MandelbrotSet:
         #print("Mandelbrot Runtime:", time.time()-start)
 
     #TODO: Force coordinates to hold aspect ratio.
-    def zoom(self, inout="in", iterates=250):
+    def zoom(self, inout="in"):
         self.window.zoom(inout)
-        self.regPlotSet(maxIterates=iterates)
+        self.regPlotSet()
 
 
 if __name__ == "__main__":
@@ -73,9 +72,9 @@ if __name__ == "__main__":
     #plt.imshow(numoutput)
 
     #Using graphics.py:
-    m.regPlotSet(maxIterates=50)
-    m.zoom(iterates=1000)
-    m.zoom(iterates=5000)
+    m.regPlotSet()
+    m.zoom()
+    m.zoom()
 
     m.window.getMouse()
     m.window.close()

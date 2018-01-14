@@ -10,25 +10,26 @@ class JuliaSet:
         self.lqwindow = NLDGraphWin("LQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.hqwindow = NLDGraphWin("HQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.hqwindow.setBackground(color_rgb(75,75,255))
+        self. maxIterates = 2000
 
-    def regPlotSet(self, maxIterates = 2000, const = .365 - 0.37j):
+    def regPlotSet(self, const = .365 - 0.37j):
         start = time.time()
         y, x = np.ogrid[self.hqwindow.currentCoords[1]:self.hqwindow.currentCoords[3]:self.hqwindow.height*1j, self.hqwindow.currentCoords[0]:self.hqwindow.currentCoords[2]:self.hqwindow.width*1j]
         c = x + y*1j
         z = c
-        divergeIter = maxIterates + np.zeros(z.shape, dtype=int)
+        divergeIter = self.maxIterates + np.zeros(z.shape, dtype=int)
 
-        for i in range(maxIterates):
+        for i in range(self.maxIterates):
             z = z**2 + const
             diverge = abs(z) >= 2
-            divergingNow = diverge & (divergeIter == maxIterates)
+            divergingNow = diverge & (divergeIter == self.maxIterates)
             divergeIter[divergingNow] = i
             z[diverge] = 2
 
         for i in range(len(c)):
             for ii in range(len(c[i])):
                 it = divergeIter[i][ii]
-                if it != maxIterates:
+                if it != self.maxIterates:
                     z = c[i][ii]
                     if it <= 40:
                         color = it * 6 + 50
@@ -62,9 +63,9 @@ class JuliaSet:
         self.lqwindow.update()
         #print ("LQ Runtime:", time.time()-start, "for a c value of:", const)
 
-    def zoom(self, inout="in", iterates=250, fill=False):
+    def zoom(self, inout="in", iterates=250, fill=False, constan = .365 - 0.37j):
         self.hqwindow.zoom(inout)
-        self.regPlotSet(maxIterates=iterates,fill=fill)
+        self.regPlotSet(fill=fill, const = constan)
 
 if __name__ == '__main__':
     m = JuliaSet(800, 800)
