@@ -8,6 +8,7 @@ from getOption import *
 from MandelbrotSet import *
 from JuliaSet import *
 
+global constant
 constant = .365 - 0.37j
 
 def main():
@@ -47,11 +48,11 @@ def main():
         elif inp == '2':
             inputC(julia=julia)
         elif inp == '3':
-            julia.maxIterates = int(getOption(1, 25000))
+            julia.maxIterates = int(getOption(1, 100000))
             julia.hqwindow.clear()
             julia.regPlotSet(const=constant)
         elif inp == '4':
-            mandelbrot.maxIterates = int(getOption(1, 25000))
+            mandelbrot.maxIterates = int(getOption(1, 100000))
             mandelbrot.window.clear()
             mandelbrot.regPlotSet()
         elif inp == '5':
@@ -74,24 +75,23 @@ def choosePoint(julia, mandelbrot):
     inp = input("Would you like to draw a high quality render of the point " + str(complex(point.x, point.y)) + " ? y/n \n")
     if inp == 'y':
         julia.hqwindow.clear()
-        julia.regPlotSet(const = complex(point.x, point.y))
+        julia.regPlotSet(const=complex(point.x, point.y))
 
 def inputC(julia):
     invalid = True
     while invalid:
         newC = input("Input a 'c' value for the Julia Set in Python syntax. (ex. .365 - 0.37j)\n")
         try:
-            newC = eval(newC)
+            constant = eval(newC)
             invalid = False
         except:
             print("Try again please.")
     julia.lqwindow.clear()
-    julia.inversePlotSet(const=newC)
-    constant = newC
+    julia.inversePlotSet(const=constant)
     inp = input("Would you like to draw a high quality render of the point " + str(constant) + " ? y/n: ")
     if inp == 'y':
         julia.hqwindow.clear()
-        julia.regPlotSet(const = constant)
+        julia.regPlotSet(const=constant)
 
 
 if __name__ == '__main__':
