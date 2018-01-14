@@ -30,7 +30,7 @@ def main():
     #      Allow user to change num of iterates / quality
     #      Optimize iterate amount based on zoom
     while running:
-        print("1. Click a point on the Mandelbrot Set and draw the corresponding Julia Set.")
+        print("\n1. Click a point on the Mandelbrot Set and draw the corresponding Julia Set.")
         print("2. Manually input a c value and draw it.")
         print("3. Manually input the number of iterates to run the Julia Set HQ for.")
         print("4. Manually input the number of iterates to run the Mandelbrot Set for.")
