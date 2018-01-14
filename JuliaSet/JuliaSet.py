@@ -10,7 +10,7 @@ class JuliaSet:
         self.lqwindow = NLDGraphWin("LQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.hqwindow = NLDGraphWin("HQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.hqwindow.setBackground(color_rgb(75,75,255))
-        self. maxIterates = 2000
+        self.maxIterates = 2000
 
     def regPlotSet(self, const = .365 - 0.37j):
         start = time.time()
