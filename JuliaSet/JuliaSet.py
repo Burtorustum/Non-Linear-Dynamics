@@ -1,5 +1,4 @@
 #JuliaSet.py
-
 from nld_graphics import *
 import numpy as np
 import time as time
@@ -9,7 +8,7 @@ class JuliaSet:
     def __init__ (self, pixelWidth, pixelHeight):
         self.lqwindow = NLDGraphWin("LQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
         self.hqwindow = NLDGraphWin("HQ Julia Set", pixelWidth, pixelHeight, [-2,-2,2,2])
-        self.hqwindow.setBackground(color_rgb(75,75,255))
+        #self.hqwindow.setBackground(color_rgb(75,75,255))
         self.maxIterates = 2000
 
     def regPlotSet(self, const = .365 - 0.37j):
@@ -31,16 +30,20 @@ class JuliaSet:
                 it = divergeIter[i][ii]
                 if it != self.maxIterates:
                     z = c[i][ii]
-                    if it <= 40:
-                        color = it * 6 + 50
-                        if color > 255:
-                            color = 255
-                        self.hqwindow.plot(z.real, z.imag, color_rgb(0, 0, color))
-                    else:
-                        color = 255 - it * 3
-                        if color < 0:
-                            color = 1
-                            self.hqwindow.plot(z.real, z.imag, color_rgb(color, color * 10, 0))
+                    color = it * 2
+                    if color > 255:
+                        color = 255
+                    self.hqwindow.plot(z.real, z.imag, color_rgb(color, color, color))
+                    #if it <= 40:
+                    #    color = it * 6 + 50
+                    #    if color > 255:
+                    #        color = 255
+                    #    self.hqwindow.plot(z.real, z.imag, color_rgb(0, 0, color))
+                    #else:
+                    #    color = 255 - it * 3
+                    #    if color < 0:
+                    #        color = 1
+                    #        self.hqwindow.plot(z.real, z.imag, color_rgb(color, color * 10, 0))
         self.hqwindow.update()
         print("HQ Runtime:", time.time()-start, "for a c value of:", const)
 
