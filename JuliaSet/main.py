@@ -10,6 +10,7 @@ from JuliaSet import *
 
 def main():
     running = True
+    constant = .365 - 0.37j
     print("This program is for viewing Julia Sets with varying c values as well as the Mandelbrot Set.\n")
     print("Now loading Mandelbrot Set...")
     mandelbrot = MandelbrotSet(600,600)
@@ -17,11 +18,11 @@ def main():
     mandelbrot.window.update()
     print("Now loading a Julia Set low quality render...")
     julia = JuliaSet(600,600)
-    julia.inversePlotSet()
+    julia.inversePlotSet(const=constant)
     julia.lqwindow.update()
+    print("Now loading a Julia Set high quality render... \n")
+    julia.regPlotSet(const=constant)
     julia.hqwindow.update()
-
-    constant = .365 - 0.37j
 
     #TODO:
     #      Manually input a c value
@@ -34,11 +35,11 @@ def main():
         print("3. Manually input the number of iterates to run the Julia Set HQ for.")
         print("4. Manually input the number of iterates to run the Mandelbrot Set for.")
         print("5. Zoom in on the HQ Julia Set.")
-        print("6. Zoom out on the HQ Julia Set")
+        print("6. Zoom out on the HQ Julia Set.")
         print("7. Zoom in on the Mandelbrot Set.")
-        print("8. Zoom out on the Mandelbrot Set")
+        print("8. Zoom out on the Mandelbrot Set.")
 
-        inp = input("Choose an option from the list... ")
+        inp = input("\nChoose an option from the list... ")
         if inp == '0':
             running = False
         elif inp == '1':
