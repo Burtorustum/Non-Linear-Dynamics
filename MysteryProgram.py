@@ -18,10 +18,10 @@ for x in range(numPoints):
     window.update()
 
 print("Choose your number of iterations.")
-iterations = int(getOption(0, 100000))
+iterations = int(getOption(0, 10000000000))
 randomPoint = Point(randint(-10000, 10000), randint(-10000, 10000))
 
-inverse = True if input("Would you like to plot the inverse fractal? y/n ").lower() == 'y' else False
+inverse = True if input("Would you like to plot the s fractal? y/n ").lower() == 'y' else False
 
 start = time.time()
 for x in range(iterations):
