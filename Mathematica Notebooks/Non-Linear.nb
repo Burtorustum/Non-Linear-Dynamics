@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      4358,        145]
-NotebookOptionsPosition[      3314,        110]
-NotebookOutlinePosition[      3667,        126]
-CellTagsIndexPosition[      3624,        123]
+NotebookDataLength[      7533,        236]
+NotebookOptionsPosition[      6285,        197]
+NotebookOutlinePosition[      6638,        213]
+CellTagsIndexPosition[      6595,        210]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -102,9 +102,96 @@ Cell[BoxData[
       RowBox[{"-", "0.4"}], "+", 
       RowBox[{".7", "I"}]}]}], "}"}], ",", 
    RowBox[{"PlotLegends", "\[Rule]", "Automatic"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.721479429681314*^9, 
-  3.7214794804505367`*^9}},ExpressionUUID->"c3e70482-791c-45ee-8328-\
-383fc85fbdee"]
+ CellChangeTimes->{{3.721479429681314*^9, 3.7214794804505367`*^9}, {
+  3.726349867417572*^9, 
+  3.726349868216658*^9}},ExpressionUUID->"c3e70482-791c-45ee-8328-\
+383fc85fbdee"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"w", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "1"}], "}"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\n", 
+ RowBox[{"Dynamic", "[", 
+  RowBox[{
+   RowBox[{"w", "=", 
+    RowBox[{
+     RowBox[{"ScalingTransform", "[", 
+      RowBox[{
+       RowBox[{".96", " ", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1.56"}], ",", "0"}], "}"}]}], "]"}], "@", "w"}]}], ";",
+    "\[IndentingNewLine]", 
+   RowBox[{"ImageAdjust", "@", 
+    RowBox[{"MandelbrotSetPlot", "[", 
+     RowBox[{
+      RowBox[{"Complex", "@@@", "w"}], ",", 
+      RowBox[{"Frame", "\[Rule]", "None"}]}], "]"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.7263498723327312`*^9, 
+  3.726349872336652*^9}},ExpressionUUID->"ce5f1519-4820-420b-84b1-\
+17d638f53124"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"w", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "1"}], "}"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\n", 
+ RowBox[{"AbsoluteTiming", "[", 
+  RowBox[{
+   RowBox[{"f", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"w", "=", 
+           RowBox[{
+            RowBox[{"ScalingTransform", "[", 
+             RowBox[{
+              RowBox[{".98", " ", 
+               RowBox[{"{", 
+                RowBox[{"1", ",", "1"}], "}"}]}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"-", "1.56"}], ",", "0"}], "}"}]}], "]"}], "@", 
+            "w"}]}], ";"}], ",", "4"}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"MandelbrotSetPlot", "[", 
+        RowBox[{
+         RowBox[{"Complex", "@@@", "w"}], ",", 
+         RowBox[{"Frame", "\[Rule]", "None"}], ",", 
+         RowBox[{"PlotRangePadding", "\[Rule]", "0"}], ",", 
+         RowBox[{"ImageResolution", "\[Rule]", "1000"}], ",", 
+         RowBox[{"MaxIterations", "\[Rule]", "100"}], ",", 
+         RowBox[{"EscapeRadius", "\[Rule]", "10000"}], ",", 
+         RowBox[{"ColorFunction", "\[Rule]", 
+          RowBox[{"ColorData", "[", "\"\<SunsetColors\>\"", "]"}]}], ",", 
+         RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}]}], "]"}]}],
+       ",", 
+      RowBox[{"{", "300", "}"}]}], "]"}]}], ";"}], "]"}], "\n", 
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<mz.gif\>\"", ",", "f", ",", 
+   RowBox[{"\"\<DisplayDurations\>\"", "\[Rule]", 
+    RowBox[{"Table", "[", 
+     RowBox[{".05", ",", 
+      RowBox[{"Length", "@", "f"}]}], "]"}]}], ",", 
+   RowBox[{"ImageResolution", "\[Rule]", "500"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.726349918505053*^9, 
+  3.726349918507442*^9}},ExpressionUUID->"e7459e98-d405-4352-ae8b-\
+1552c618fa67"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -143,8 +230,12 @@ Cell[1965, 68, 650, 14, 58, "Input", "ExpressionUUID" -> \
 Cell[CellGroupData[{
 Cell[2652, 87, 159, 3, 64, "Section", "ExpressionUUID" -> \
 "a2093f93-a6e5-4174-8620-12cdbbd12bb1"],
-Cell[2814, 92, 472, 14, 32, "Input", "ExpressionUUID" -> \
-"c3e70482-791c-45ee-8328-383fc85fbdee"]
+Cell[2814, 92, 521, 15, 32, "Input", "ExpressionUUID" -> \
+"c3e70482-791c-45ee-8328-383fc85fbdee"],
+Cell[3338, 109, 946, 30, 75, "Input", "ExpressionUUID" -> \
+"ce5f1519-4820-420b-84b1-17d638f53124"],
+Cell[4287, 141, 1970, 52, 201, "Input", "ExpressionUUID" -> \
+"e7459e98-d405-4352-ae8b-1552c618fa67"]
 }, Open  ]]
 }, Open  ]]
 }
