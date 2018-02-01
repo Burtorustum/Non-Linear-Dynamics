@@ -22,5 +22,5 @@ echo ''
 echo "${txtgrn}All done!${txtrst}"
 echo ''
 
-popd > dev/null
+popd > /dev/null
 exit
