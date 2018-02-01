@@ -15,11 +15,11 @@ class Transformation:
     def transform(self, points):
         transformedPoints = []
         for point in points:
-            transformedPoints.append(apply(point))
+            transformedPoints.append(self.apply(point))
         return transformedPoints
 
     def apply(self, point):
         x = self.r * cos(self.theta) * point.x - self.s * sin(self.phi) * point.y + self.h
         y = self.r * sin(self.theta) * point.x + self.s * cos(self.phi) * point.y + self.k
 
-        return Point(x, y)
+        return Point(x, y)4y7g
