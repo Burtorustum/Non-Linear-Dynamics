@@ -1,3 +1,4 @@
+#RegularPolygons.py
 from math import sin, cos, pi
 
 def genPolygonPoints(numPoints, centerpoint = (0,0), radius = 1)
