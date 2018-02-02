@@ -4,11 +4,10 @@ from math import sin, cos
 
 class Transformation:
     def __init__(self, r=1, s=1, theta=0, phi=None, h=0, k=0):
-        phi = theta if phi == None else phi
+        self.phi = theta if phi == None else phi
         self.r = r
         self.s = s
         self.theta = theta
-        self.phi = phi
         self.h = h
         self.k = k
 
