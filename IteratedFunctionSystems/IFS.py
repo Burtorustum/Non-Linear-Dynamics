@@ -13,21 +13,26 @@ def main():
     t1 = TransformationObject(r=.5, s=.5)
     t2 = TransformationObject(r=.5, s=.5,h=.5)
     t3 = TransformationObject(r=.5, s=.5,k=.5)
+
     transformations = [t1, t2, t3]
-    pointeroo = Point(1, 1)
+    pointeroo = (1,1)
 
+    print("Transients")
     for x in range(1000000):
-        random = randint(0,2)
+        random = randint(0,len(transformations)-1)
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
 
+    print("Plotting")
+    startime = time.time()
     for x in range(100000):
-        random = randint(0,2)
+        random = randint(0,len(transformations)-1)
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
-        window.plot(pointeroo.x, pointeroo.y)
-        if x % 3000 == 0:
+        window.plot(pointeroo[0], pointeroo[1])
+        if x % 5000 == 0:
             window.update()
+    print(time.time()-startime)
 
     window.update()
     window.getMouse()

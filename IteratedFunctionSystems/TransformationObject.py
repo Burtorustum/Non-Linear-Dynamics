@@ -18,7 +18,7 @@ class TransformationObject:
         return transformedPoints
 
     def apply(self, point):
-        x = self.r * cos(self.theta) * point.x - self.s * sin(self.phi) * point.y + self.h
-        y = self.r * sin(self.theta) * point.x + self.s * cos(self.phi) * point.y + self.k
+        x = self.r * cos(self.theta) * point[0] - self.s * sin(self.phi) * point[1] + self.h
+        y = self.r * sin(self.theta) * point[0] + self.s * cos(self.phi) * point[1] + self.k
 
-        return Point(x, y)
+        return (x, y)
