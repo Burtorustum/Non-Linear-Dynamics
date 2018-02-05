@@ -1,7 +1,9 @@
 #MysteryProgram.py
 from graphics import *
 from random import randint
-from Utility.getOption import getOption
+path = os.path.dirname(os.path.abspath(__file__))
+path = path.replace("MysteryProgram", "Utility")
+sys.path.insert(0, path)
 import time
 
 window = GraphWin("Mystery Program", 800, 800, False)
