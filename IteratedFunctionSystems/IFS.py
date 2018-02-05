@@ -8,11 +8,11 @@ from random import randint
 import time
 from TransformationObject import *
 
-window = NLDGraphWin("IFS", 800, 800, [-1,-1,1,1])
+window = NLDGraphWin("IFS", 800, 800, [0,0,1,1])
 def main():
     t1 = TransformationObject(r=.5, s=.5)
-    t2 = TransformationObject(r=.5, s=.5,h=.5)
-    t3 = TransformationObject(r=.5, s=.5,k=.5)
+    t2 = TransformationObject(r=.5, s=.5, h=.5)
+    t3 = TransformationObject(r=.5, s=.5, h=.25, k=.5)
 
     transformations = [t1, t2, t3]
     pointeroo = (1,1)
