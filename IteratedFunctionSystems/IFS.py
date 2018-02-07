@@ -13,7 +13,30 @@ def main():
     t1 = TransformationObject(r=.5, s=.5)
     t2 = TransformationObject(r=.5, s=.5, h=.5, theta=45)
     t3 = TransformationObject(r=.5, s=.5, k=.5)
+    transformations = []
+    transformOptions = ['r', 's', 'theta', 'phi', 'h', 'k']
+    nextTransformOptions = []
+    gettingIn = True
 
+    inp = ""
+    while (gettingIn):
+        inp = input("Enter 'e' to end the input sequence. Otherwise enter a transformations. 'd' will give a default transformation set.")
+        if (inp.lower() == 'e'):
+            gettingIn = False
+        elif (inp.lower() == 'd'):
+            transformations = [t1, t2, t3]
+            gettingIn = False
+        else:
+            for thing in transformOptions:
+                inp = input("Enter a value for", thing)
+                try:
+                    x = eval(inp)
+                    nextTransformOptions.append(x)
+                except:
+                    print("that was not a valid input. Using 0 instead. ")
+
+            transformations.append(TransformationObject(r=nextTransformOptions[0], s=nextTransformOptions[1], theta=nextTransformOptions[2], phi=nextTransformOptions[3], h=nextTransformOptions[4], k=nextTransformOptions[5]))
+            print(transformations[-1].toString())
     transformations = [t1, t2, t3]
     pointeroo = (randrange(-1,1),randrange(-1,1))
 
