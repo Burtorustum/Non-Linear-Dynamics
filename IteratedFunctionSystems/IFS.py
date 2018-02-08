@@ -21,7 +21,7 @@ def main():
     inp = ""
     while (gettingIn):
         inp = input("Enter 'e' to end the input sequence. Otherwise enter a transformations. 'd' will give a default transformation set. ")
-        if (inp.lower() == 'e'):
+        if (inp.lower() == 'e' and len(transformations) != 0):
             gettingIn = False
         elif (inp.lower() == 'd'):
             transformations = [t1, t2, t3]
@@ -33,11 +33,14 @@ def main():
                     x = eval(inp)
                     nextTransformOptions.append(x)
                 except:
-                    print("that was not a valid input. Using 0 instead. ")
+                    print("that was not a valid input. Using 0 instead.")
 
             transformations.append(TransformationObject(r=nextTransformOptions[0], s=nextTransformOptions[1], theta=nextTransformOptions[2], phi=nextTransformOptions[3], h=nextTransformOptions[4], k=nextTransformOptions[5]))
-            print(transformations[-1])
-    pointeroo = (randrange(-1,1),randrange(-1,1))
+            nextTransformOptions[:] = []
+            print(transformations[-1], '\n')
+    pointeroo = (.5,.5)
+    for transform in transformations:
+        print(transform)
 
     random = randint(0,len(transformations)-1)
     transform = transformations[random]
@@ -72,12 +75,12 @@ def main():
 
     print("Plotting")
     startime = time.time()
-    for x in range(250000):
+    for x in range(100000):
         random = randint(0,len(transformations)-1)
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
         window.plot(pointeroo[0], pointeroo[1])
-        if x % 10000 == 0:
+        if x % 5000 == 0:
             window.update()
     print(time.time()-startime)
     print("Done.")
