@@ -34,6 +34,7 @@ def main():
                     nextTransformOptions.append(x)
                 except:
                     print("that was not a valid input. Using 0 instead.")
+                    nextTransformOptions.append(0)
 
             transformations.append(TransformationObject(r=nextTransformOptions[0], s=nextTransformOptions[1], theta=nextTransformOptions[2], phi=nextTransformOptions[3], h=nextTransformOptions[4], k=nextTransformOptions[5]))
             nextTransformOptions[:] = []
@@ -75,7 +76,7 @@ def main():
 
     print("Plotting")
     startime = time.time()
-    for x in range(100000):
+    for x in range(500000):
         random = randint(0,len(transformations)-1)
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
