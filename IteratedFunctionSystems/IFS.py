@@ -20,7 +20,7 @@ def main():
 
     inp = ""
     while (gettingIn):
-        inp = input("Enter 'e' to end the input sequence. Otherwise enter a transformations. 'd' will give a default transformation set.")
+        inp = input("Enter 'e' to end the input sequence. Otherwise enter a transformations. 'd' will give a default transformation set. ")
         if (inp.lower() == 'e'):
             gettingIn = False
         elif (inp.lower() == 'd'):
@@ -28,7 +28,7 @@ def main():
             gettingIn = False
         else:
             for thing in transformOptions:
-                inp = input("Enter a value for", thing)
+                inp = input("Enter a value for " + thing + ": ")
                 try:
                     x = eval(inp)
                     nextTransformOptions.append(x)
@@ -36,8 +36,7 @@ def main():
                     print("that was not a valid input. Using 0 instead. ")
 
             transformations.append(TransformationObject(r=nextTransformOptions[0], s=nextTransformOptions[1], theta=nextTransformOptions[2], phi=nextTransformOptions[3], h=nextTransformOptions[4], k=nextTransformOptions[5]))
-            print(transformations[-1].toString())
-    transformations = [t1, t2, t3]
+            print(transformations[-1])
     pointeroo = (randrange(-1,1),randrange(-1,1))
 
     random = randint(0,len(transformations)-1)
@@ -81,6 +80,7 @@ def main():
         if x % 10000 == 0:
             window.update()
     print(time.time()-startime)
+    print("Done.")
 
     window.update()
     window.getMouse()

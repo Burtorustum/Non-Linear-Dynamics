@@ -17,5 +17,5 @@ class TransformationObject:
         y = self.r * sin(self.theta) * point[0] + self.s * cos(self.phi) * point[1] + self.k
         return (x, y)
 
-    def toString(self):
+    def __str__(self):
         return "r: " + str(self.r) + " s: " + str(self.s) + " theta: " + str(self.theta) + " phi: " + str(self.phi) + " h: " + str(self.h) + " k: " + str(self.k)
