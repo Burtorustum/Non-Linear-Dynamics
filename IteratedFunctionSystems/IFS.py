@@ -14,7 +14,7 @@ def main():
     t2 = TransformationObject(r=.5, s=.5, h=.5, theta=45)
     t3 = TransformationObject(r=.5, s=.5, k=.5)
     transformations = []
-    transformOptions = ['r', 's', 'theta', 'phi', 'h', 'k']
+    transformOptions = ['r', 's', 'theta', 'phi', 'h', 'k', 'probability']
     nextTransformOptions = []
     gettingIn = True
 
@@ -33,15 +33,32 @@ def main():
                     x = eval(inp)
                     nextTransformOptions.append(x)
                 except:
-                    print("that was not a valid input. Using 0 instead.")
-                    nextTransformOptions.append(0)
+                    if thing == 'phi' or thing == 'probability':
+                        print("that was not a valid input. Using None instead.")
+                        nextTransformOptions.append(None)
+                    else:
+                        print("that was not a valid input. Using 0 instead.")
+                        nextTransformOptions.append(0)
 
             transformations.append(TransformationObject(r=nextTransformOptions[0], s=nextTransformOptions[1], theta=nextTransformOptions[2], phi=nextTransformOptions[3], h=nextTransformOptions[4], k=nextTransformOptions[5]))
             nextTransformOptions[:] = []
             print(transformations[-1], '\n')
-    pointeroo = (.5,.5)
+    pointeroo = (randrange(-1000,1000) / 1000.1,randrange(-1,1) / 1000.1)
+
+    minimumProb = 1
     for transform in transformations:
+        if minimumProb > transform.probability:
+            minimumProb = transform.probability
+
+    print (minimumProb)
+    newTransformations = []
+    for transform in transformations:
+        transform.probability = 1/minimumProb * transform.probability
+        #print(transform.probability)
+        for i in range(int(transform.probability)):
+            newTransformations.append(transform)
         print(transform)
+    transformations = newTransformations
 
     random = randint(0,len(transformations)-1)
     transform = transformations[random]
@@ -68,20 +85,32 @@ def main():
         elif pointeroo[1] < minY:
             minY = pointeroo[1]
 
-
-    if maxX - minX > maxY - minY:
-        window.setCoords(minX - .1, minX - .1, maxX + .1, maxX + .1)
+    minimum = minX if minX < minY else minY
+    maximum = maxX if minimum == minX else maxY
+    if minimum == minX:
+        while maxX - minX <= maxY - minY:
+            maxX += .1
+            minX -= .1
+        minimum = minX
+        maximum = maxX
     else:
-        window.setCoords(minY - .1, minY - .1, maxY + .1, maxY + .1)
+        while maxX - minX >= maxY - minY:
+            maxY += .1
+            minY -= .1
+        minimum = minY
+        maximum = maxY
+
+    #print(str(minimum) + " " + str(maximum))
+    window.setCoords(minimum-.1, minimum-.1, maximum+.1, maximum+.1)
 
     print("Plotting")
     startime = time.time()
-    for x in range(500000):
+    for x in range(1000000):
         random = randint(0,len(transformations)-1)
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
         window.plot(pointeroo[0], pointeroo[1])
-        if x % 5000 == 0:
+        if x % 5000 == 0 and x < 20000:
             window.update()
     print(time.time()-startime)
     print("Done.")
