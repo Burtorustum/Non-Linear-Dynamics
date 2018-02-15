@@ -23,6 +23,11 @@ def main():
         inp = input("Enter 'e' to end the input sequence. Otherwise enter a transformations. 'd' will give a default transformation set. ")
         if (inp.lower() == 'e' and len(transformations) != 0):
             gettingIn = False
+        elif inp.lower() == 'l':
+            temp = TransformationObject()
+            temp.strToVals(input("Enter the list of values.\n"))
+            transformations.append(temp)
+            print(str(transformations[-1]), '\n')
         elif (inp.lower() == 'd'):
             transformations = [t1, t2, t3]
             gettingIn = False
@@ -47,22 +52,25 @@ def main():
 
     minimumProb = 1
     for transform in transformations:
-        if minimumProb > transform.probability:
+        if minimumProb > transform.probability and transform.probability != 0:
             minimumProb = transform.probability
 
     print (minimumProb)
     newTransformations = []
     for transform in transformations:
         transform.probability = 1/minimumProb * transform.probability
+        if transform.probability == 0:
+            transform.probability = 1
         #print(transform.probability)
-        for i in range(int(transform.probability)):
+        for i in range(abs(int(transform.probability))):
             newTransformations.append(transform)
         print(transform)
     transformations = newTransformations
 
-    random = randint(0,len(transformations)-1)
-    transform = transformations[random]
-    pointeroo = transform.apply(pointeroo)
+    for x in range(100):
+        random = randint(0,len(transformations)-1)
+        transform = transformations[random]
+        pointeroo = transform.apply(pointeroo)
 
     minX = pointeroo[0]
     minY = pointeroo[1]
@@ -70,7 +78,7 @@ def main():
     maxY = pointeroo[1]
 
     print("Transients")
-    for x in range(1000000):
+    for x in range(1500000):
         random = randint(0,len(transformations)-1)
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
@@ -110,7 +118,7 @@ def main():
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
         window.plot(pointeroo[0], pointeroo[1])
-        if x % 5000 == 0 and x < 20000:
+        if x % 5000 == 0 and x < 50000:
             window.update()
     print(time.time()-startime)
     print("Done.")
