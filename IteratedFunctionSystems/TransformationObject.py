@@ -38,11 +38,10 @@ class TransformationObject:
         newTransforms = []
 
         for part in strArr:
-            #print(part)
             nexty = part.split(": ")[1]
             newTransforms.append(nexty)
 
-        newTransforms = [float(newTransforms[0]), float(newTransforms[1]), float(newTransforms[2]), float(newTransforms[3]), float(newTransforms[4]), float(newTransforms[5])]
+        newTransforms = [float(eval(newTransforms[0])), float(eval(newTransforms[1])), float(eval(newTransforms[2])), float(eval(newTransforms[3])), float(eval(newTransforms[4])), float(eval(newTransforms[5]))]
         self.changeTransform(newTransforms[0], newTransforms[1], newTransforms[2], newTransforms[3], newTransforms[4], newTransforms[5])
 
     def __str__(self):

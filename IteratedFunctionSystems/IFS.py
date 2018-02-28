@@ -1,4 +1,5 @@
 #IFS.py
+import copy
 from nld_graphics import *
 from graphics import *
 path = os.path.dirname(os.path.abspath(__file__))
@@ -59,26 +60,26 @@ def main():
     newTransformations = []
     for transform in transformations:
         transform.probability = 1/minimumProb * transform.probability
-        if transform.probability == 0:
+        if transform.probability < 1:
             transform.probability = 1
-        #print(transform.probability)
         for i in range(abs(int(transform.probability))):
             newTransformations.append(transform)
         print(transform)
     transformations = newTransformations
 
-    for x in range(100):
+
+    for x in range(50000):
         random = randint(0,len(transformations)-1)
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
 
-    minX = pointeroo[0]
-    minY = pointeroo[1]
-    maxX = pointeroo[0]
-    maxY = pointeroo[1]
+    minX = copy.copy(pointeroo[0])
+    minY = copy.copy(pointeroo[1])
+    maxX = copy.copy(pointeroo[0])
+    maxY = copy.copy(pointeroo[1])
 
     print("Transients")
-    for x in range(1500000):
+    for x in range(150000):
         random = randint(0,len(transformations)-1)
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
@@ -93,23 +94,19 @@ def main():
         elif pointeroo[1] < minY:
             minY = pointeroo[1]
 
-    minimum = minX if minX < minY else minY
-    maximum = maxX if minimum == minX else maxY
-    if minimum == minX:
-        while maxX - minX <= maxY - minY:
-            maxX += .1
-            minX -= .1
-        minimum = minX
-        maximum = maxX
-    else:
-        while maxX - minX >= maxY - minY:
-            maxY += .1
-            minY -= .1
-        minimum = minY
-        maximum = maxY
+    #minimum = minX if minX < minY else minY
+    #maximum = maxX if minimum == minX else maxY
+    minimum = [minX, minY]
+    maximum = [maxX, maxY]
+    while abs(maximum[0] - minimum[0]) < abs(maximum[1] - minimum[1]):
+        maximum[0] += .1
+        minimum[0] -= .1
+    while abs(maximum[0] - minimum[0]) > abs(maximum[1] - minimum[1]):
+        maximum[1] += .01
+        minimum[1] -= .01
 
-    #print(str(minimum) + " " + str(maximum))
-    window.setCoords(minimum-.1, minimum-.1, maximum+.1, maximum+.1)
+    window.setCoords(minimum[0], minimum[1], maximum[0], maximum[1])
+    window.update()
 
     print("Plotting")
     startime = time.time()
@@ -118,14 +115,14 @@ def main():
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
         window.plot(pointeroo[0], pointeroo[1])
-        if x % 5000 == 0 and x < 50000:
+        if x % 5000 == 0:
             window.update()
     print(time.time()-startime)
-    print("Done.")
 
     window.update()
     window.getMouse()
     window.close()
+    print("Done.")
 
 if __name__ == '__main__':
     main()
