@@ -21,7 +21,7 @@ def main():
 
     inp = ""
     while (gettingIn):
-        inp = input("Enter 'e' to end the input sequence. Otherwise enter a transformations. 'd' will give a default transformation set. ")
+        inp = input("Enter 'e' to end the input sequence. Otherwise enter a transformation. 'd' will give a default transformation set. 'l' allows for single line input of the form this program outputs. Anything else entered will begin the transformation entering process. ")
         if (inp.lower() == 'e' and len(transformations) != 0):
             gettingIn = False
         elif inp.lower() == 'l':
@@ -56,10 +56,9 @@ def main():
         if minimumProb > transform.probability and transform.probability != 0:
             minimumProb = transform.probability
 
-    print (minimumProb)
     newTransformations = []
     for transform in transformations:
-        transform.probability = 1/minimumProb * transform.probability
+        transform.probability = (1/minimumProb * transform.probability) **2
         if transform.probability < 1:
             transform.probability = 1
         for i in range(abs(int(transform.probability))):
@@ -115,13 +114,13 @@ def main():
         transform = transformations[random]
         pointeroo = transform.apply(pointeroo)
         window.plot(pointeroo[0], pointeroo[1])
-        if x % 5000 == 0:
+        if x % 5000 == 0 and x < 50000:
             window.update()
-    print(time.time()-startime)
 
     window.update()
     window.getMouse()
     window.close()
+    print(time.time()-startime)
     print("Done.")
 
 if __name__ == '__main__':
