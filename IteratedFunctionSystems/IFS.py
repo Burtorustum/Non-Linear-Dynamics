@@ -58,7 +58,7 @@ def main():
 
     newTransformations = []
     for transform in transformations:
-        transform.probability = (1/minimumProb * transform.probability) **2
+        transform.probability = (1/minimumProb * transform.probability) ** 2
         if transform.probability < 1:
             transform.probability = 1
         for i in range(abs(int(transform.probability))):
@@ -93,8 +93,6 @@ def main():
         elif pointeroo[1] < minY:
             minY = pointeroo[1]
 
-    #minimum = minX if minX < minY else minY
-    #maximum = maxX if minimum == minX else maxY
     minimum = [minX, minY]
     maximum = [maxX, maxY]
     while abs(maximum[0] - minimum[0]) < abs(maximum[1] - minimum[1]):
