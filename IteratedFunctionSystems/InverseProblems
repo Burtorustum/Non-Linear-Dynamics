@@ -119,3 +119,7 @@ Class Fern:
 |r: 0.01|s: 13.5/85|theta: 0|phi: 0|h: 0|k: 0|Probability: 1|
 |r: 28.5/85|s: 28.5/85|theta: 54|phi: 54|h: 0|k: 13.5/85|Probability: 3|
 |r: 33/85|s: 33/85|theta: -27|phi: -27|h: 0|k: 4/85|Probability: 3|
+
+Koch Curve (60 deg):
+|r: 0.57735026939|s: -0.57735026939|theta: 30|phi: 30|h: 0|k: 0|Probability: 1.0|
+|r: 0.57735026939|s: -0.57735026939|theta: -30|phi: -30|h: 0.5|k: 0.288675135|Probability: 1.0|
