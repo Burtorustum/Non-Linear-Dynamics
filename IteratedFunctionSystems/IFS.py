@@ -96,11 +96,11 @@ def main():
     minimum = [minX, minY]
     maximum = [maxX, maxY]
     while abs(maximum[0] - minimum[0]) < abs(maximum[1] - minimum[1]):
-        maximum[0] += .1
-        minimum[0] -= .1
+        maximum[0] += .01
+        minimum[0] -= .01
     while abs(maximum[0] - minimum[0]) > abs(maximum[1] - minimum[1]):
-        maximum[1] += .01
-        minimum[1] -= .01
+        maximum[1] += .005
+        minimum[1] -= .005
 
     window.setCoords(minimum[0], minimum[1], maximum[0], maximum[1])
     window.update()
