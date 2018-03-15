@@ -4,7 +4,7 @@ from math import sin, cos, pi
 
 class TransformationObject:
     def __init__(self, r=1, s=1, theta=0, phi=None, h=0, k=0, probability=None):
-        self.probability = r if probability == None else probability
+        self.probability = abs(r * s) if probability == None or r != s else probability
         self.phiDeg = theta if phi == None else phi
         self.thetaDeg = theta
         self.r = r
@@ -13,7 +13,6 @@ class TransformationObject:
         self.phi = self.phiDeg * pi/180
         self.h = h
         self.k = k
-        self.partList = ['r: ', 's: ', 'theta: ', 'phi: ', 'h: ', 'k: ']
 
     def changeTransform(self, r=1, s=1, theta=0, phi=None, h=0, k=0, probability=None):
         self.probability = r if probability == None else probability
