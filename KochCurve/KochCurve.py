@@ -43,12 +43,12 @@ class KochCurve:
 
 def main():
     pointeroo = Point(0,0)
-    angle = 60
+    angle = -60
     curve = KochCurve(angle)
-    curve.drawCurve(pointeroo, 1, 5, True)
-    maxY = 1/(2*math.sin(math.radians(angle))+2)
-    minY = 0
-    maxX = 1
+    curve.drawCurve(pointeroo, 1, 5, False)
+    maxY = 1/(2*math.sin(math.radians(angle))+2) if angle >= 0 else 0
+    minY = 0 if angle >= 0 else 1/(2*math.sin(math.radians(angle))+2) * -1
+    maxX = curve.endPoint.getX()
     minX = 0
     while abs(maxX - minX) < abs(maxY - minY):
         maxX += .01
