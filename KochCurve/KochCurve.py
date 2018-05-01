@@ -11,6 +11,7 @@ class KochCurve:
         self.initialAngle = math.radians(initialAngle)
         self.initialLength = initialLength
         self.startPoint = None
+        self.initalPoint = None
         self.curAngle = 0
         self.height = 1/(2*math.sin(self.initialAngle)+2)
 
@@ -21,44 +22,52 @@ class KochCurve:
         startPoint.move(deltaX, deltaY)
         Line(ogPoint, startPoint).draw(self.window)
 
-    def drawCurveRec(self, startPoint, length, level, viewMode):
+    def drawCurveRec(self, startPoint, length, level, viewMode, colored):
+        if colored:
+            Polygon(startPoint, ).draw(self.window)
         if(level == 0):
             self.drawLine(startPoint, length, self.curAngle)
             if (viewMode == 'animated'):
                 self.window.update()
         else:
             length *= self.height
-            #TODO: Fix the length adjustment so that it makes 4 even segments correctly.
-            self.drawCurveRec(startPoint, length, level - 1, viewMode)
+            self.drawCurveRec(startPoint, length, level - 1, viewMode, colored)
             self.curAngle += self.initialAngle
-            self.drawCurveRec(startPoint, length, level - 1, viewMode)
+            self.drawCurveRec(startPoint, length, level - 1, viewMode, colored)
             self.curAngle -= 2 * self.initialAngle
-            self.drawCurveRec(startPoint, length, level - 1, viewMode)
+            self.drawCurveRec(startPoint, length, level - 1, viewMode, colored)
             self.curAngle += self.initialAngle
-            self.drawCurveRec(startPoint, length, level - 1, viewMode)
+            self.drawCurveRec(startPoint, length, level - 1, viewMode, colored)
 
         if(viewMode == 'animated'):
-            self.window.setCoords(startPoint.getX()-.05*self.initialLength, startPoint.getY()-.05*self.initialLength, startPoint.getX()+.05*self.initialLength, startPoint.getY()+.05*self.initialLength)
+            self.window.setCoords(startPoint.getX()-.05*self.initialLength/(2*self.level), startPoint.getY()-.05*self.initialLength/(2*self.level), startPoint.getX()+.05*self.initialLength/(2*self.level), startPoint.getY()+.05*self.initialLength/(2*self.level))
         elif(viewMode == 'cinema'):
-            self.scaleWindow(startPoint)
+            if startPoint.getX() > self.maxX.getX():
+                self.maxX = startPoint
+            self.scaleWindow(self.maxX)
 
-    def drawCurve(self, startPoint, level, overallDirection, viewMode):
+    def drawCurve(self, startPoint, level, overallDirection, viewMode, colored):
+        self.level = copy.copy(level)
+        self.initalPoint = copy.copy(startPoint)
         self.startPoint = copy.copy(startPoint)
         self.curAngle = math.radians(overallDirection)
-        self.drawCurveRec(startPoint, self.initialLength, level, viewMode)
+        self.maxX = copy.copy(startPoint)
+        self.drawCurveRec(startPoint, self.initialLength, level, viewMode, colored)
         self.endPoint = copy.copy(startPoint)
         if viewMode== 'animated':
             self.animatedScaleWindow(self.endPoint)
-        elif viewMode == 'regular' or viewMode ==
-        self.scaleWindow(self.endPoint)
+        elif viewMode == 'regular':
+            self.scaleWindow(self.endPoint)
+        elif viewMode == 'cinema':
+            self.scaleWindow(self.maxX)
 
-    def drawPolygon(self, startPoint, level, numSides):
+    def drawPolygon(self, startPoint, level, numSides, inner=False):
         maxX = 0
         maxY = 0
         minX = 0
         minY = 0
         for side in range(numSides):
-            self.drawCurve(startPoint, level, (360/numSides)*side, 'regular')
+            self.drawCurve(startPoint, level, (1 if inner else -1)*(360/numSides)*side, 'None', False)
             if startPoint.getX() > maxX:
                 maxX = startPoint.getX()
             if startPoint.getY() > maxY:
@@ -68,35 +77,38 @@ class KochCurve:
             if startPoint.getY() < minY:
                 minY = startPoint.getY()
 
-        self.window.setCoords(minX, minY, maxX, maxY)
+        if not inner:
+            self.window.setCoords(minX-.01, minY-.01, maxX+.01, maxY+.01)
+        else:
+            self.window.setCoords(minX - self.height - .01, minY - self.height - .01, maxX + self.height + .01, maxY + self.height + .01)
         self.window.update()
 
     def scaleWindow(self, pointCurrent):
-        maxY = self.height if self.initialAngle >= 0 else 0
-        minY = 0 if self.initialAngle >= 0 else self.height * -1
+        maxY = self.height
+        minY = 0
         maxX = pointCurrent.getX()
         minX = 0
         while abs(maxX - minX) < abs(maxY - minY):
             maxX += .01
             minX -= .01
         while abs(maxX - minX) > abs(maxY - minY):
-            maxY += .005
-            minY -= .005
-        self.window.setCoords(minX-.01, minY, maxX+.01, maxY)
+            maxY += .001
+            minY -= .001
+        self.window.setCoords(minX, minY, maxX, maxY)
         self.window.update()
 
     def animatedScaleWindow(self, pointCurrent):
-        maxY = self.height if self.initialAngle >= 0 else 0
-        minY = 0 if self.initialAngle >= 0 else self.height * -1
-        maxX = pointCurrent.getX()
+        maxY = self.height
+        minY = 0
+        maxX = pointCurrent.getX()+.001
         minX = 0
 
         while abs(maxX - minX) < abs(maxY - minY):
             maxX += .01
             minX -= .01
         while abs(maxX - minX) > abs(maxY - minY):
-            maxY += .005
-            minY -= .005
+            maxY += .001
+            minY -= .001
 
         curMaxY = copy.copy(pointCurrent.getY())
         curMinY = copy.copy(pointCurrent.getY())
@@ -108,22 +120,21 @@ class KochCurve:
                 curMaxX += .01
                 curMinX -= .01
             while abs(curMaxX - curMinX) > abs(curMaxY - curMinY):
-                curMaxY += .005
-                curMinY -= .005
+                curMaxY += .001
+                curMinY -= .001
             curMaxX = maxX
-            curMinX -= .005
-            curMaxY += .005
+            curMinX -= .001
+            curMaxY += .001
             self.window.setCoords(curMinX, curMinY, curMaxX, curMaxY)
             self.window.update()
-        self.scaleWindow(pointCurrent)
 
 def main():
     angle = 60
     length = 1
     curve = KochCurve(angle, length)
     point = Point(0,0)
-    curve.drawPolygon(point, 6, 7)
-    #curve.drawCurve(point, 3, 0, "animated")
+    curve.drawPolygon(point, 6, 3)
+    #curve.drawCurve(point, 5, 0, "animated", True)
     curve.window.getMouse()
     curve.window.close()
 
