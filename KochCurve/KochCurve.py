@@ -15,6 +15,20 @@ class KochCurve:
         self.curAngle = 0
         self.height = 1/(2*math.sin(self.initialAngle)+2)
 
+    def clear(self):
+        self.window.items = []
+        self.window.clear()
+        self.startPoint = None
+        self.initialPoint = None
+        self.curAngle = 0
+
+    def setAngle(self, newAngle):
+        self.initialAngle = math.radians(newAngle)
+        self.height = 1/(2*math.sin(self.initialAngle)+2)
+
+    def setLength(self, newLength):
+        self.initialLength = newLength
+
     def drawLine(self, startPoint, length, direction):
         ogPoint = copy.copy(startPoint)
         deltaX = length * math.cos(direction)
@@ -40,7 +54,7 @@ class KochCurve:
             self.drawCurveRec(startPoint, length, level - 1, viewMode, colored)
 
         if(viewMode == 'animated'):
-            self.window.setCoords(startPoint.getX()-.05*self.initialLength/(2*self.level), startPoint.getY()-.05*self.initialLength/(2*self.level), startPoint.getX()+.05*self.initialLength/(2*self.level), startPoint.getY()+.05*self.initialLength/(2*self.level))
+            self.window.setCoords(startPoint.getX()-.1*self.initialLength/(2*self.level), startPoint.getY()-.1*self.initialLength/(2*self.level), startPoint.getX()+.1*self.initialLength/(2*self.level), startPoint.getY()+.1*self.initialLength/(2*self.level))
         elif(viewMode == 'cinema'):
             if startPoint.getX() > self.maxX.getX():
                 self.maxX = startPoint
@@ -77,10 +91,10 @@ class KochCurve:
             if startPoint.getY() < minY:
                 minY = startPoint.getY()
 
-        if not inner:
+        if inner:
             self.window.setCoords(minX-.01, minY-.01, maxX+.01, maxY+.01)
         else:
-            self.window.setCoords(minX - self.height - .01, minY - self.height - .01, maxX + self.height + .01, maxY + self.height + .01)
+            self.window.setCoords(minX - self.height, minY - self.height, maxX + self.height, maxY + self.height)
         self.window.update()
 
     def scaleWindow(self, pointCurrent):
@@ -100,7 +114,7 @@ class KochCurve:
     def animatedScaleWindow(self, pointCurrent):
         maxY = self.height
         minY = 0
-        maxX = pointCurrent.getX()+.001
+        maxX = pointCurrent.getX()+.005
         minX = 0
 
         while abs(maxX - minX) < abs(maxY - minY):
