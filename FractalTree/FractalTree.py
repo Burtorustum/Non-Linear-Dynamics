@@ -36,12 +36,12 @@ class FractalTree:
         if level != -1 and assymetricLevel > 0:
             #Could change where branches off from AND how many branches come from another branch (for loop system for recursive calls - unknown number of branches coming off of a given branch)
             point2 = copy.copy(point)
-            self.drawTreeRec(level-1, point, length * self.scaleFactor, angle - rightFactor*self.initialAngle, width=(width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, leftFactor=leftFactor, rightFactor=rightFactor, widthScaling=widthScaling, assymetricLevel=assymetricLevel-1)
-            self.drawTreeRec(level-1, point2, length * self.scaleFactor, angle + leftFactor*self.initialAngle, width=(width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, leftFactor=leftFactor, rightFactor=rightFactor, widthScaling=widthScaling, assymetricLevel=assymetricLevel-1)
+            self.drawTreeRec(level-1, point, length * self.scaleFactor, angle - rightFactor*self.initialAngle, width= (width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, leftFactor=leftFactor, rightFactor=rightFactor, widthScaling=widthScaling, assymetricLevel=assymetricLevel-1)
+            self.drawTreeRec(level-1, point2, length * self.scaleFactor, angle + leftFactor*self.initialAngle, width= (width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, leftFactor=leftFactor, rightFactor=rightFactor, widthScaling=widthScaling, assymetricLevel=assymetricLevel-1)
         elif level != -1:
             point2 = copy.copy(point)
-            self.drawTreeRec(level-1, point, length * self.scaleFactor, angle - rightFactor*self.initialAngle, width=(width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, widthScaling=widthScaling)
-            self.drawTreeRec(level-1, point2, length * self.scaleFactor, angle + leftFactor*self.initialAngle, width=(width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, widthScaling=widthScaling)
+            self.drawTreeRec(level-1, point, length * self.scaleFactor, angle - rightFactor*self.initialAngle, width= (width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, widthScaling=widthScaling)
+            self.drawTreeRec(level-1, point2, length * self.scaleFactor, angle + leftFactor*self.initialAngle, width= (width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, widthScaling=widthScaling)
 
 def main():
     tree = FractalTree(30, .75)
