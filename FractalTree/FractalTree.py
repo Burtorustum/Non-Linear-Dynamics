@@ -6,7 +6,7 @@ from nld_graphics import *
 class FractalTree:
 
     def __init__(self, initialAngle, scaleFactor):
-        self.window = NLDGraphWin("Fractal Tree", 600, 600, [-5,-5,5,5])
+        self.window = NLDGraphWin("Fractal Tree: " + str(initialAngle) + " degrees", 600, 600, [-5,-5,5,5])
         self.initialAngle = math.radians(initialAngle)
         self.scaleFactor = scaleFactor
 
