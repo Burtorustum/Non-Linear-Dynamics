@@ -38,16 +38,8 @@ class FractalTree:
         nextLength = length * self.scaleFactor * (uniform(self.scaleFactor,1) if randomLength else 1)
         nextAngle1 = angle - rightFactor*self.initialAngle+(math.radians(randrange(-int(abs(self.initialAngleDeg)),int(abs(self.initialAngleDeg)))) if randomAngle else 0)
         nextAngle2 = angle + rightFactor*self.initialAngle+(math.radians(randrange(-int(abs(self.initialAngleDeg)),int(abs(self.initialAngleDeg)))) if randomAngle else 0)
-        
+
         if level != -1:
             point2 = copy.copy(point)
             self.drawTreeRec(level-1, point, nextLength, nextAngle1, width= (width-1 if widthScaling else width), animated=animated, colored=colored, randomLength=randomLength,randomAngle=randomAngle, widthScaling=widthScaling, leftFactor= (1 if assymetricLevel <= 0 else leftFactor), rightFactor= (1 if assymetricLevel <= 0 else rightFactor), assymetricLevel= (0 if assymetricLevel <= 0 else assymetricLevel-1))
             self.drawTreeRec(level-1, point2, nextLength, nextAngle2, width= (width-1 if widthScaling else width), animated=animated, colored=colored, randomLength=randomLength, randomAngle=randomAngle, widthScaling=widthScaling, leftFactor= (1 if assymetricLevel <= 0 else leftFactor), rightFactor= (1 if assymetricLevel <= 0 else rightFactor), assymetricLevel= (0 if assymetricLevel <= 0 else assymetricLevel-1))
-
-        #if level != -1 and assymetricLevel > 0:
-            #Could change where branches off from AND how many branches come from another branch (for loop system for recursive calls - unknown number of branches coming off of a given branch – would this even work lol)
-        #    self.drawTreeRec(level-1, point, length * self.scaleFactor, angle - rightFactor*self.initialAngle, width= (width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, leftFactor=leftFactor, rightFactor=rightFactor, widthScaling=widthScaling, assymetricLevel=assymetricLevel-1)
-        #    self.drawTreeRec(level-1, point2, length * self.scaleFactor, angle + leftFactor*self.initialAngle, width= (width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, leftFactor=leftFactor, rightFactor=rightFactor, widthScaling=widthScaling, assymetricLevel=assymetricLevel-1)
-        #elif level != -1:
-        #    self.drawTreeRec(level-1, point, length * self.scaleFactor, angle - rightFactor*self.initialAngle, width= (width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, widthScaling=widthScaling)
-        #    self.drawTreeRec(level-1, point2, length * self.scaleFactor, angle + leftFactor*self.initialAngle, width= (width-1 if widthScaling else width), animated=animated, colored=colored,randomLength=randomLength, widthScaling=widthScaling)
