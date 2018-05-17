@@ -6,8 +6,8 @@ from random import uniform, randrange
 
 class FractalTree:
 
-    def __init__(self, initialAngle, scaleFactor):
-        self.window = NLDGraphWin("Fractal Tree: " + str(initialAngle) + " degrees", 600, 600, [-5,-5,5,5])
+    def __init__(self, initialAngle, scaleFactor, window=NLDGraphWin("Fractal Tree: " + str(initialAngle) + " degrees", 600, 600, [-5,-5,5,5])):
+        self.window = window
         self.initialAngleDeg = initialAngle
         self.initialAngle = math.radians(initialAngle)
         self.scaleFactor = scaleFactor
@@ -43,3 +43,10 @@ class FractalTree:
             point2 = copy.copy(point)
             self.drawTreeRec(level-1, point, nextLength, nextAngle1, width= (width-1 if widthScaling else width), animated=animated, colored=colored, randomLength=randomLength,randomAngle=randomAngle, widthScaling=widthScaling, leftFactor= (1 if assymetricLevel <= 0 else leftFactor), rightFactor= (1 if assymetricLevel <= 0 else rightFactor), assymetricLevel= (0 if assymetricLevel <= 0 else assymetricLevel-1))
             self.drawTreeRec(level-1, point2, nextLength, nextAngle2, width= (width-1 if widthScaling else width), animated=animated, colored=colored, randomLength=randomLength, randomAngle=randomAngle, widthScaling=widthScaling, leftFactor= (1 if assymetricLevel <= 0 else leftFactor), rightFactor= (1 if assymetricLevel <= 0 else rightFactor), assymetricLevel= (0 if assymetricLevel <= 0 else assymetricLevel-1))
+
+    def clear(self):
+        self.window.items = []
+        self.window.clear()
+        self.scaleFactor = 1
+        self.initialAngleDeg = 0
+        self.initalAngle = 0
