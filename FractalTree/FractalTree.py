@@ -14,6 +14,8 @@ class FractalTree:
         self.initialAngleDeg = initialAngle
         self.initialAngle = math.radians(initialAngle)
         self.scaleFactor = scaleFactor
+        self.startLenWinItems = len(window.items)
+        self.endLenWinItems = len(window.items)
 
     def drawLine(self, startPoint, length, direction, color='black', width=3):
         ogPoint = copy.copy(startPoint)
@@ -26,6 +28,7 @@ class FractalTree:
         l.draw(self.window)
 
     def drawTreeRec(self, level, point, length, angle, animated=True, colored=True, randomLength=False, randomAngle=False, leftFactor=1, rightFactor=1, widthScaling=True, width=10, assymetricLevel=0):
+
         if width < 1:
             width = 1
 
@@ -46,9 +49,13 @@ class FractalTree:
             point2 = copy.copy(point)
             self.drawTreeRec(level-1, point, nextLength, nextAngle1, width= (width-1 if widthScaling else width), animated=animated, colored=colored, randomLength=randomLength,randomAngle=randomAngle, widthScaling=widthScaling, leftFactor= (1 if assymetricLevel <= 0 else leftFactor), rightFactor= (1 if assymetricLevel <= 0 else rightFactor), assymetricLevel= (0 if assymetricLevel <= 0 else assymetricLevel-1))
             self.drawTreeRec(level-1, point2, nextLength, nextAngle2, width= (width-1 if widthScaling else width), animated=animated, colored=colored, randomLength=randomLength, randomAngle=randomAngle, widthScaling=widthScaling, leftFactor= (1 if assymetricLevel <= 0 else leftFactor), rightFactor= (1 if assymetricLevel <= 0 else rightFactor), assymetricLevel= (0 if assymetricLevel <= 0 else assymetricLevel-1))
-
+        else:
+            self.endLenWinItems = len(self.window.items)
+            
     def clear(self):
-        self.window.items = []
+        for x in reversed(range(self.startLenWinItems, self.endLenWinItems)):
+            self.window.items[x] = Line(Point(-1000,-1000),Point(-1001,-1001))
+        #self.window.items = []
         self.window.clear()
         self.scaleFactor = 1
         self.initialAngleDeg = 0
