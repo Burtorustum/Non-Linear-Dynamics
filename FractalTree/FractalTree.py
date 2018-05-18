@@ -6,8 +6,11 @@ from random import uniform, randrange
 
 class FractalTree:
 
-    def __init__(self, initialAngle, scaleFactor, window=NLDGraphWin("Fractal Tree: " + str(initialAngle) + " degrees", 600, 600, [-5,-5,5,5])):
-        self.window = window
+    def __init__(self, initialAngle, scaleFactor, window):
+        if window == None:
+            self.window = NLDGraphWin("Fractal Tree", 600, 600, [-5,-5,5,5])
+        else:
+            self.window = window
         self.initialAngleDeg = initialAngle
         self.initialAngle = math.radians(initialAngle)
         self.scaleFactor = scaleFactor
